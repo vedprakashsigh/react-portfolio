@@ -1,0 +1,46 @@
+.home-page{
+    .text-zone {
+        position: absolute;
+        left: 22%;
+        top: 50%;
+        transform: translateY(-50deg);
+        width: 55%;
+    }
+
+    h1{
+        color: #fff;
+        font-size: 53px;
+        margin: 0;
+        font-family: 'Source Code Pro';
+        font-weight: 400;
+    }
+}
+
+h2{
+    color: #8d8d8d;
+    margin-top: 20px;
+    font-weight: 400;
+    font-size: 14px;
+    letter-spacing: 3px;
+    font-family: "sans-serif";
+    animation: fadeIn 1s 1.8s backwards;
+}
+
+.flat-btn{
+    color: #ffd700;
+    font-weight: 400;
+    font-size: 400;
+    letter-spacing: 4px;
+    font-family: "sans-serif";
+    text-decoration: none;
+    padding: 10px 18px;
+    border: 1px solid #ffd700;
+    float: left;
+    animation: fadeIn 1s 1.8s backwards;
+    white-space: nowrap;
+
+    &:hover{
+        background-color: #ffd700;
+        color: #333;
+    }
+}
