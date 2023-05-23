@@ -9,14 +9,15 @@
 
   .logo {
     display: block;
-    margin: 20px 0;
-    text-decoration: none;
-    color: #fff;
-    text-align: center;
-    font-family: "Mate SC";
-    letter-spacing: 2px;
-    font-weight: 900;
-    font-size: 18px;
+    padding: 8px 0;
+
+    img{
+      display: block;
+      margin: 8px auto;
+      width: 60px;
+      height: auto;
+    }
+
   }
 
   nav {

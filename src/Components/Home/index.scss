@@ -44,3 +44,23 @@ h2{
         color: #333;
     }
 }
+
+.logo-container {
+    z-index: -2;
+    width: 750px;
+    height: 600px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    margin: auto;
+
+    .solid-logo {
+        position: absolute;
+        right: auto;
+        margin: auto;
+        width: 100%;
+        transform: rotateZ(20deg);
+        z-index: 1;
+        animation: fadeIn 1s;
+    }
+}

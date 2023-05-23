@@ -8,12 +8,13 @@ import LinkedIn from "../../assets/images/linkedin.png";
 import GitHub from "../../assets/images/github.png";
 import Instagram from "../../assets/images/instagram.png";
 import Mail from "../../assets/images/gmail.png";
+import Logo from '../../assets/images/Logo.png'
 
 const Sidebar = () => {
   return (
     <div className="nav-bar">
       <Link className="logo" to="/">
-        Ved Prakash
+        <img src={Logo} alt="Logo"  />
       </Link>
       <nav>
         <NavLink exact="true" activeclassname="active" to="/">
