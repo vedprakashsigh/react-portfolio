@@ -100,16 +100,17 @@
 
   ul{
     position: absolute;
-    bottom: 20%;
+    bottom: 0%;
     width: 100%;
-    display: block;
+    display: flex;
+    justify-content: space-around;
     padding: 0;
     list-style: none;
     text-align: center;
     margin: 0;
 
     li{
-        a{
+      a{
             padding: 7px 0;
             display: block;
             font-size: 15px;
@@ -117,7 +118,6 @@
 
             &:hover img{
                 filter: invert(100%);
-                width: 23px;
             }
         }
     }
