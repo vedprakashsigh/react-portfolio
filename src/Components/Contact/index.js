@@ -45,10 +45,23 @@ const Contact = () => {
             />
           </h1>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque
-            similique quis quam nam consequatur sed ut dolor architecto iste
-            magni nobis quasi quaerat hic, recusandae officia sapiente suscipit
-            odit beatae.
+            Thank you for taking the time to visit my portfolio website! If you
+            have any questions or would like to discuss a potential project,
+            please don't hesitate to get in touch.
+            <br />
+            If you prefer to use a contact form, you can fill out the form below
+            and I will get back to you as soon as possible.
+            <br />
+            My availability varies depending on my current workload, but I will
+            do my best to respond to all inquiries as soon as possible. If you
+            have a specific deadline or timeline in mind, please let me know and
+            I will do my best to accommodate your needs.
+            <br /> Thank you again for your interest in my work. I look forward
+            to hearing from you soon!
+            <br />
+            Best regards,
+            <br />
+            <code>Ved Prakash</code>
           </p>
           <div className="contact-form">
             <form ref={refForm} onSubmit={sendEmail}>
