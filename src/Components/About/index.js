@@ -47,7 +47,7 @@ const About = () => {
               <AnimatedLetters
                 letterClass={letterClass}
                 strArray={["S", "k", "i", "l", "l", "s"]}
-                idx={25}
+                idx={15}
               />
             </h2>
             <p>
