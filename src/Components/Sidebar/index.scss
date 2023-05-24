@@ -1,6 +1,6 @@
 .nav-bar {
   background: #181818;
-  width: 150px;
+  width: 100px;
   height: 100%;
   position: absolute;
   top: 0;
@@ -11,13 +11,12 @@
     display: block;
     padding: 8px 0;
 
-    img{
+    img {
       display: block;
       margin: 8px auto;
       width: 60px;
       height: auto;
     }
-
   }
 
   nav {
@@ -73,33 +72,33 @@
       }
     }
 
-    a.about-page{
-        &::after{
-            content: "ABOUT";
-        }
+    a.about-page {
+      &::after {
+        content: "ABOUT";
+      }
     }
 
-    a.project-page{
-        &::after{
-            content: "PROJECTS";
-        }
+    a.project-page {
+      &::after {
+        content: "PROJECTS";
+      }
     }
 
-    a.contact-page{
-        &::after{
-            content: "CONTACT";
-        }
+    a.contact-page {
+      &::after {
+        content: "CONTACT";
+      }
     }
 
     a.active {
-        img{
-            filter: invert(100%);
-            width: 35px;
-        }
+      img {
+        filter: invert(100%);
+        width: 35px;
+      }
     }
   }
 
-  ul{
+  ul {
     position: absolute;
     bottom: 0%;
     width: 100%;
@@ -110,17 +109,17 @@
     text-align: center;
     margin: 0;
 
-    li{
-      a{
-            padding: 7px 0;
-            display: block;
-            font-size: 15px;
-            line-height: 16px;
+    li {
+      a {
+        padding: 7px 0;
+        display: block;
+        font-size: 15px;
+        line-height: 16px;
 
-            &:hover img{
-                filter: invert(100%);
-            }
+        &:hover img {
+          filter: invert(100%);
         }
+      }
     }
   }
 }
