@@ -7,6 +7,7 @@ import HTML from '../../assets/images/html5.png';
 import PY from '../../assets/images/python.png';
 import GIT from '../../assets/images/git.png';
 import REACT from '../../assets/images/react.png';
+import Loader from "react-loaders";
 
 const About = () => {
   const [letterClass, setLetterClass] = useState("text-animate");
@@ -18,6 +19,7 @@ const About = () => {
   }, []);
 
   return (
+    <>
     <div className="container about-page">
       <div className="text-zone">
         <h1>
@@ -67,6 +69,8 @@ const About = () => {
         </div>
       </div>
     </div>
+    <Loader type="ball-rotate"/>
+    </>
   );
 };
 
