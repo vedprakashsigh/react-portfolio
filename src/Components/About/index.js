@@ -96,6 +96,7 @@ const About = () => {
           </div>
         </div>
       </div>
+      <div className="no-text"></div>
       <Loader type="ball-rotate" />
     </>
   );

@@ -109,6 +109,10 @@
   }
 }
 
+.no-text {
+  height: 0;
+}
+
 @media screen and (max-width: 1200px) {
   .stage-cube-cont {
     position: initial;
@@ -116,5 +120,9 @@
     height: 0%;
     overflow: visible;
     padding-top: 8%;
+  }
+
+  .no-text {
+    height: 300px;
   }
 }
