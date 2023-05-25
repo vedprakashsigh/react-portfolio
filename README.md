@@ -11,20 +11,20 @@ This is a portfolio website built with ReactJS and SCSS. The website showcases m
 
 ## Installation
 
-1.  Clone the repository
-2.  Install dependencies with `npm install`
-3.  Start the development server with `npm start`
+1. Clone the repository
+2. Install dependencies with `npm install`
+3. Start the development server with `npm start`
 
-<!---->
-
-    git clone https://github.com/vedprakashsigh/react-portfolio.git
+```
+git clone https://github.com/vedprakashsigh/react-portfolio.git
     cd portfolio-website
     npm install
     npm start
+```
 
 ## Usage
 
-The website is deployed on [Cloudflare](https://www.cloudflare.com/en-gb/). You can access it at <https://react-portfolio-q2r.pages.dev/>.
+The website is deployed on [Cloudflare](https://www.cloudflare.com/en-gb/). You can access it at [https://react-portfolio-q2r.pages.dev/](https://react-portfolio-q2r.pages.dev/).
 
 ## Contributing
 
