@@ -17,7 +17,7 @@
       "techStack": "HTML CSS ReactJS",
       "url": "https://vedprakash.me/"
     },
-    
+
     {
       "id": 3,
       "cover": "/projects/PongGame/pong.png",
@@ -25,6 +25,6 @@
       "description": "Made a Pong Game using PyGames Module of Python.",
       "techStack": "PYTHON PYGAME",
       "url": "https://github.com/vedprakashsigh/pong"
-    },
+    }
   ]
 }
