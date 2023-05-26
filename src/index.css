@@ -13,6 +13,16 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.dashboard {
+  margin: 200px;
+  color: #fff;
+}
+
+.btn {
+  display: block;
+  margin-top: 10px;
+}
+
 @media screen and (max-width: 1200px) {
   body {
     overflow: visible;

@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import Loader from "react-loaders";
+import { collection, getDocs } from "firebase/firestore";
 import AnimatedLetters from "../AnimatedLetters";
+import { db } from "../../firebase";
 import "./index.scss";
-import projectData from "../../Data/project.json";
 
 const Project = () => {
   const [letterClass, setLetterClass] = useState("text-animate");
+  const [projects, setProjects] = useState([]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -13,15 +15,24 @@ const Project = () => {
     }, 3000);
   }, []);
 
+  useEffect(() => {
+    getProject();
+  }, []);
+
+  const getProject = async () => {
+    const querySnapshot = await getDocs(collection(db, "projects"));
+    setProjects(querySnapshot.docs.map((doc) => doc.data()));
+  };
+
   const renderData = (projects) => {
     return (
       <div className="images-container">
-        {projects.map((project) => {
+        {projects.map((project, idx) => {
           return (
-            <div className="image-box" key={project.idx}>
+            <div className="image-box" key={idx}>
               <img
                 className="project-image"
-                src={project.cover}
+                src={project.image}
                 alt={project.title}
               />
               <div className="content">
@@ -51,7 +62,7 @@ const Project = () => {
             idx={15}
           />
         </h1>
-        <div>{renderData(projectData.projects)}</div>
+        <div>{renderData(projects)}</div>
       </div>
       <Loader type="ball-rotate" />
     </>
