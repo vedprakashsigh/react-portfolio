@@ -37,6 +37,7 @@ const Project = () => {
               />
               <div className="content">
                 <p className="title">{project.title}</p>
+                <p className="techStack">{project.techStack}</p>
                 <h4 className="description"> {project.description} </h4>
                 <button
                   className="btn"
