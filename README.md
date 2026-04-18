@@ -1,35 +1,92 @@
-# Portfolio Website
+# Ved Prakash - Portfolio 2.0
 
-This is a portfolio website built with ReactJS and SCSS. The website showcases my work, skills, and experience.
+A high-performance, dynamic portfolio website and content management system, completely rewritten using a modern web stack.
 
-## Features
+🚀 **Live Site:** [https://vedprakash.me/](https://vedprakash.me/)
 
-- Home page with an introduction and a call-to-action button
-- About page with a brief summary of my experience and education and Skills section with a list of my skills and their proficiency level
-- Projects page with a list of my projects and their descriptions
-- Contact page with a contact form to get in touch with me
+![Portfolio Preview](./public/vite.svg) (*Preview Image to be added*)
 
-## Installation
+## 🛠️ Tech Stack
 
-1. Clone the repository
-2. Install dependencies with `npm install`
-3. Start the development server with `npm start`
+### Frontend Architecture
+- **Framework:** React 18
+- **Build Tool:** Vite
+- **Language:** TypeScript
+- **Routing:** React Router v6
 
+### Design System & UI
+- **Styling:** Vanilla CSS + Tailwind CSS (v3)
+- **Component Library:** ShadCN UI (Radix UI primitives)
+- **Aesthetic:** Neural Dark (Glassmorphism, deep dark backgrounds with cyan/violet accents)
+- **Animations:** Custom CSS Keyframes, Interactive Particle Canvas
+
+### Backend & Database
+- **BaaS:** Supabase
+- **Database:** PostgreSQL (Projects, Experience, Education, Skills, Certifications)
+- **Authentication:** Supabase Auth (Admin dashboard access)
+- **Storage:** Supabase Storage buckets (Resume PDF hosting)
+
+### Testing
+- **Test Runner:** Vitest
+- **DOM Testing:** React Testing Library + Happy DOM
+
+---
+
+## ✨ Features
+
+- **"Neural Dark" Aesthetic:** Custom designed highly interactive particle neural network background using HTML5 canvas.
+- **Dynamic Content:** All data (projects, skills, education, experience) is securely fetched from a Supabase backend.
+- **Admin Dashboard:** A custom-built, authenticated CMS that allows real-time Create, Read, Update, and Delete operations for portfolio configuration.
+- **Live LeetCode Stats:** A fully integrated widget pulling live real-time problem-solving metrics directly from LeetCode. 
+- **Resume Hosting:** Dedicated frontend interface allowing visitors to view and download an up-to-date Resume PDF loaded directly from Supabase Storage buckets.
+
+---
+
+## 🚀 Local Development
+
+### Prerequisites
+You will need Node.js (v20+ recommended) and an active Supabase project.
+
+### Environment Setup
+Create a `.env` file at the root of the project with your Supabase credentials:
+
+```bash
+VITE_SUPABASE_URL=your-supabase-url
+VITE_SUPABASE_PUBLISHABLE_KEY=your-supabase-anon-key
 ```
+
+### Database Initialization
+Execute the included SQL scripts on your Supabase SQL Editor:
+1. Run `supabase-schema.sql` to initialize all relational database tables.
+2. Run `seed-data.sql` to populate the frontend with baseline mock data.
+3. Create a Supabase Storage bucket named `uploads` and make it public to host the resume PDF.
+
+### Installation
+
+```bash
+# Clone the repository
 git clone https://github.com/vedprakashsigh/react-portfolio.git
-    cd portfolio-website
-    npm install
-    npm start
+
+# Navigate into directory
+cd react-portfolio
+
+# Install dependencies
+npm install
+
+# Start the Vite development server
+npm run dev
 ```
 
-## Usage
+### Running Tests
 
-The website is deployed on [Cloudflare](https://www.cloudflare.com/en-gb/). You can access it at [https://vedprakash.me/](https://vedprakash.me/).
+```bash
+# Execute test suite
+npm run test
 
-## Contributing
+# Execute test suite with Visual UI
+npm run test:ui
+```
 
-Contributions are welcome. If you find any issues or have suggestions for improvement, please open an issue or submit a pull request.
-
-## License
+## 📝 License
 
 This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
