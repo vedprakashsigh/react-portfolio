@@ -162,4 +162,42 @@
     0% { background-position: -200% 0; }
     100% { background-position: 200% 0; }
   }
+
+  /* Agent flow connector animation */
+  .agent-flow-connector {
+    background: linear-gradient(90deg, transparent, hsl(var(--primary) / 0.6), transparent);
+    background-size: 200% 100%;
+    animation: flow-pulse 2s ease-in-out infinite;
+    border: none;
+    height: 1px;
+  }
+
+  @keyframes flow-pulse {
+    0% { background-position: -200% 0; opacity: 0.4; }
+    50% { opacity: 1; }
+    100% { background-position: 200% 0; opacity: 0.4; }
+  }
+
+  /* Accessibility: respect prefers-reduced-motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+
+    .page-enter {
+      animation: none;
+      opacity: 1;
+    }
+
+    .btn-shimmer {
+      animation: none;
+    }
+
+    .agent-flow-connector {
+      animation: none;
+      background: hsl(var(--primary) / 0.3);
+    }
+  }
 }

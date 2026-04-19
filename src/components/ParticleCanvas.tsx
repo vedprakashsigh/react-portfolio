@@ -16,7 +16,7 @@ export default function ParticleCanvas() {
   const mouseRef = useRef({ x: -1000, y: -1000 })
 
   const initParticles = useCallback((width: number, height: number) => {
-    const count = Math.min(Math.floor((width * height) / 12000), 120)
+    const count = Math.min(Math.floor((width * height) / 18000), 80)
     const particles: Particle[] = []
     for (let i = 0; i < count; i++) {
       particles.push({
@@ -36,6 +36,10 @@ export default function ParticleCanvas() {
     if (!canvas) return
     const ctx = canvas.getContext('2d')
     if (!ctx) return
+
+    // Respect prefers-reduced-motion
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (prefersReducedMotion) return
 
     const resize = () => {
       canvas.width = window.innerWidth
