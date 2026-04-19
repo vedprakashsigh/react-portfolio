@@ -1,6 +1,6 @@
-# Ved Prakash - Portfolio 2.0
+# Ved Prakash - Portfolio: Agentic AI Engineer
 
-A high-performance, dynamic portfolio website and content management system, completely rewritten using a modern web stack.
+A high-performance, dynamic portfolio website completely rewritten to showcase production-grade multi-agent AI systems, end-to-end architectures, and full-stack engineering capabilities.
 
 🚀 **Live Site:** [https://vedprakash.me/](https://vedprakash.me/)
 
@@ -18,11 +18,11 @@ A high-performance, dynamic portfolio website and content management system, com
 - **Styling:** Vanilla CSS + Tailwind CSS (v3)
 - **Component Library:** ShadCN UI (Radix UI primitives)
 - **Aesthetic:** Neural Dark (Glassmorphism, deep dark backgrounds with cyan/violet accents)
-- **Animations:** Custom CSS Keyframes, Interactive Particle Canvas
+- **Animations:** Custom CSS Keyframes, CSS Graph Connectors, Interactive Particle Canvas (with `prefers-reduced-motion` support)
 
 ### Backend & Database
 - **BaaS:** Supabase
-- **Database:** PostgreSQL (Projects, Experience, Education, Skills, Certifications)
+- **Database:** PostgreSQL (Rich project metadata, Experience, Education, Skills, Certifications)
 - **Authentication:** Supabase Auth (Admin dashboard access)
 - **Storage:** Supabase Storage buckets (Resume PDF hosting)
 
@@ -34,11 +34,12 @@ A high-performance, dynamic portfolio website and content management system, com
 
 ## ✨ Features
 
-- **"Neural Dark" Aesthetic:** Custom designed highly interactive particle neural network background using HTML5 canvas.
-- **Dynamic Content:** All data (projects, skills, education, experience) is securely fetched from a Supabase backend.
-- **Admin Dashboard:** A custom-built, authenticated CMS that allows real-time Create, Read, Update, and Delete operations for portfolio configuration.
-- **Live LeetCode Stats:** A fully integrated widget pulling live real-time problem-solving metrics directly from LeetCode. 
-- **Resume Hosting:** Dedicated frontend interface allowing visitors to view and download an up-to-date Resume PDF loaded directly from Supabase Storage buckets.
+- **Agentic AI Focus:** Engineered to highlight complex, multi-agent AI workflows and enterprise AI solutions over simple frontend apps.
+- **Proof-of-Engineering Case Studies:** AI projects feature comprehensive breakdowns including 'Why I Built This', 'Key Challenges', and 'Architecture Decisions'.
+- **Interactive Graph Diagrams:** Custom HTML/CSS component (`AgentFlowDiagram`) to visually represent stateful, cyclical agent pipelines (e.g., LangGraph).
+- **"Neural Dark" Aesthetic:** Highly interactive and dynamic particle neural network background using HTML5 canvas.
+- **Admin Dashboard:** Authenticated custom CMS that permits real-time CRUD operations to adjust project context and portfolio structure.
+- **Live LeetCode Stats:** fully integrated widget pulling live real-time problem-solving metrics directly from LeetCode.
 
 ---
 
@@ -57,9 +58,10 @@ VITE_SUPABASE_PUBLISHABLE_KEY=your-supabase-anon-key
 
 ### Database Initialization
 Execute the included SQL scripts on your Supabase SQL Editor:
-1. Run `supabase-schema.sql` to initialize all relational database tables.
+1. Run `supabase-schema.sql` to initialize all relational database tables on a fresh project.
 2. Run `seed-data.sql` to populate the frontend with baseline mock data.
-3. Create a Supabase Storage bucket named `uploads` and make it public to host the resume PDF.
+3. If upgrading an existing db, run `migration-add-project-fields.sql` to add AI engineering fields.
+4. Create a Supabase Storage bucket named `uploads` and make it public to host the resume PDF.
 
 ### Installation
 

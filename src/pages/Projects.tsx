@@ -101,7 +101,11 @@ export default function Projects() {
         // Merge remote data with fallback enrichments when remote lacks new columns
         const merged = data.map(remoteProject => {
           if (remoteProject.is_featured !== undefined && remoteProject.is_featured !== null) {
-            return remoteProject
+            let diagramType = remoteProject.architecture_diagram_type
+            if (diagramType === 'agent_pipeline') {
+              diagramType = 'invoice_system,invoice_graph'
+            }
+            return { ...remoteProject, architecture_diagram_type: diagramType }
           }
           // Find matching fallback by title to get enriched fields
           const fallback = fallbackProjects.find(fp => fp.title === remoteProject.title)
