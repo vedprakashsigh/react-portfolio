@@ -1,4 +1,4 @@
-import { Bot, FileSearch, Languages, ShieldCheck, BarChart3, AlertTriangle, Search, Brain, Wrench, FileText, Activity, Workflow, Database, Monitor, Server } from 'lucide-react'
+import { Bot, FileSearch, Languages, ShieldCheck, BarChart3, AlertTriangle, Search, Brain, Wrench, FileText, Activity, Workflow, Database, Monitor, Server, Download, User } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 
 interface DiagramNode {
@@ -16,11 +16,12 @@ const diagrams: Record<string, DiagramNode[]> = {
     { label: 'MCP Server', icon: Server },
   ],
   invoice_graph: [
-    { label: 'Invoice Extraction', icon: FileSearch },
-    { label: 'Translation', icon: Languages },
-    { label: 'ERP Validation', icon: ShieldCheck },
-    { label: 'RAG Q&A', icon: Brain },
-    { label: 'Audit Report', icon: BarChart3 },
+    { label: 'Load Data', icon: Download },
+    { label: 'Translate', icon: Languages },
+    { label: 'Extract', icon: FileSearch },
+    { label: 'Validate', icon: ShieldCheck },
+    { label: 'Human', icon: User },
+    { label: 'Final Report', icon: FileText },
   ],
   multi_agent: [
     { label: 'Alert Ingestion', icon: AlertTriangle },
