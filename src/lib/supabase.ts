@@ -16,6 +16,11 @@ export interface Project {
   project_url: string
   sort_order: number
   created_at: string
+  is_featured: boolean
+  why_i_built: string
+  key_challenges: string[]
+  architecture_decisions: string[]
+  architecture_diagram_type: string
 }
 
 export interface Experience {

@@ -12,7 +12,12 @@ CREATE TABLE IF NOT EXISTS projects (
   image_url TEXT DEFAULT '',
   project_url TEXT DEFAULT '',
   sort_order INT DEFAULT 0,
-  created_at TIMESTAMPTZ DEFAULT NOW()
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  is_featured BOOLEAN DEFAULT false,
+  why_i_built TEXT DEFAULT '',
+  key_challenges TEXT[] DEFAULT '{}',
+  architecture_decisions TEXT[] DEFAULT '{}',
+  architecture_diagram_type TEXT DEFAULT ''
 );
 
 -- Experience table

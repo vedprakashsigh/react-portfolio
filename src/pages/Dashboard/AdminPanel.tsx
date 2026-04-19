@@ -208,7 +208,7 @@ export default function AdminPanel({ user }: AdminProps) {
               tableName="projects"
               items={projects}
               reload={loadAll}
-              emptyItem={{ title: '', description: '', tech_stack: '', image_url: '', project_url: '', sort_order: projects.length, created_at: '' }}
+              emptyItem={{ title: '', description: '', tech_stack: '', image_url: '', project_url: '', sort_order: projects.length, created_at: '', is_featured: false, why_i_built: '', key_challenges: [], architecture_decisions: [], architecture_diagram_type: '' }}
               renderForm={(item, onChange) => (
                 <div className="space-y-3">
                   <div className="space-y-1"><Label>Title</Label><Input value={item.title} onChange={e => onChange({ ...item, title: e.target.value })} /></div>
