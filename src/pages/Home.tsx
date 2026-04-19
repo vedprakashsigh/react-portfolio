@@ -26,7 +26,7 @@ const featuredProjects = [
       'MCP Server wraps the graph as a tool for autonomous execution.'
     ],
     tech: ['LangChain', 'LangGraph', 'FAISS', 'Streamlit', 'Langfuse'],
-    diagramType: 'agent_pipeline',
+    diagramType: 'invoice_system,invoice_graph',
   },
   {
     title: 'AI DevOps Incident Orchestrator',
@@ -162,11 +162,17 @@ export default function Home() {
                   </div>
 
                   {/* Architecture diagram */}
-                  <div className="mb-6">
-                    <p className="text-xs font-mono text-muted-foreground uppercase tracking-wider mb-2">Agent Pipeline</p>
-                    <div className="rounded-xl border border-white/[0.06] bg-background/40 backdrop-blur-sm">
-                      <AgentFlowDiagram type={project.diagramType} compact />
-                    </div>
+                  <div className="mb-6 space-y-4">
+                    {project.diagramType.split(',').map((typeKey, i, arr) => (
+                      <div key={typeKey.trim()}>
+                        <p className="text-xs font-mono text-muted-foreground uppercase tracking-wider mb-2">
+                          {arr.length > 1 ? (i === 0 ? 'System Flow' : 'Internal Agent Workflow') : 'Agent Pipeline'}
+                        </p>
+                        <div className="rounded-xl border border-white/[0.06] bg-background/40 backdrop-blur-sm">
+                          <AgentFlowDiagram type={typeKey.trim()} compact />
+                        </div>
+                      </div>
+                    ))}
                   </div>
 
                   {/* Architecture decisions */}

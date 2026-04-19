@@ -7,13 +7,20 @@ interface DiagramNode {
 }
 
 const diagrams: Record<string, DiagramNode[]> = {
-  agent_pipeline: [
+  invoice_system: [
     { label: 'WatchDog Service', icon: Activity },
     { label: 'Graph Execution', icon: Workflow },
     { label: 'Checkpointer DB', icon: Database },
     { label: 'Streamlit UI', icon: Monitor },
     { label: 'Agentic RAG', icon: Brain },
     { label: 'MCP Server', icon: Server },
+  ],
+  invoice_graph: [
+    { label: 'Invoice Extraction', icon: FileSearch },
+    { label: 'Translation', icon: Languages },
+    { label: 'ERP Validation', icon: ShieldCheck },
+    { label: 'RAG Q&A', icon: Brain },
+    { label: 'Audit Report', icon: BarChart3 },
   ],
   multi_agent: [
     { label: 'Alert Ingestion', icon: AlertTriangle },

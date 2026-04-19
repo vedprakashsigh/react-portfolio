@@ -33,7 +33,7 @@ const fallbackProjects: Project[] = [
       'RAG incorporates a post-generation relevance check validating against source context.',
       'MCP Server exposes the entire pipeline as an executable tool for broader ecosystem integration.',
     ],
-    architecture_diagram_type: 'agent_pipeline',
+    architecture_diagram_type: 'invoice_system,invoice_graph',
   },
   {
     id: '2',
@@ -177,11 +177,17 @@ export default function Projects() {
 
                     {/* Architecture Diagram */}
                     {project.architecture_diagram_type && (
-                      <div className="mb-8">
-                        <p className="text-xs font-mono text-muted-foreground uppercase tracking-wider mb-3">Agent Architecture</p>
-                        <div className="rounded-xl border border-white/[0.06] bg-background/40 backdrop-blur-sm">
-                          <AgentFlowDiagram type={project.architecture_diagram_type} />
-                        </div>
+                      <div className="mb-8 space-y-6">
+                        {project.architecture_diagram_type.split(',').map((typeKey, i, arr) => (
+                          <div key={typeKey.trim()}>
+                            <p className="text-xs font-mono text-muted-foreground uppercase tracking-wider mb-3">
+                              {arr.length > 1 ? (i === 0 ? 'System Flow' : 'Internal Agent Workflow') : 'Agent Architecture'}
+                            </p>
+                            <div className="rounded-xl border border-white/[0.06] bg-background/40 backdrop-blur-sm">
+                              <AgentFlowDiagram type={typeKey.trim()} />
+                            </div>
+                          </div>
+                        ))}
                       </div>
                     )}
 
