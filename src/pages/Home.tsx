@@ -1,8 +1,12 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight, Sparkles, Bot, Brain, Workflow } from 'lucide-react'
+import { ArrowRight, Sparkles, Bot, Brain, Workflow, Lightbulb, Zap } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { Card, CardContent } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { Separator } from '@/components/ui/separator'
 import AnimatedLetters from '@/components/AnimatedLetters'
 import ParticleCanvas from '@/components/ParticleCanvas'
+import AgentFlowDiagram from '@/components/AgentFlowDiagram'
 
 const highlights = [
   { icon: Bot, label: 'Agentic AI' },
@@ -11,10 +15,38 @@ const highlights = [
   { icon: Sparkles, label: 'RAG Systems' },
 ]
 
+const featuredProjects = [
+  {
+    title: 'Agentic Invoice Auditor',
+    problem: 'Replaced 4+ hour manual invoice auditing with an autonomous multi-agent pipeline that completes in minutes.',
+    decisions: [
+      'WatchDog Service initiates execution within the LangGraph workflow.',
+      'Checkpointer DB handles seamless state sharing across the multi-agent pipeline.',
+      'Streamlit UI manages user queries and retrieves context via Agentic RAG with relevance checks.',
+      'MCP Server wraps the graph as a tool for autonomous execution.'
+    ],
+    tech: ['LangChain', 'LangGraph', 'FAISS', 'Streamlit', 'Langfuse'],
+    diagramType: 'agent_pipeline',
+  },
+  {
+    title: 'AI DevOps Incident Orchestrator',
+    problem: 'Automates 60% of on-call triage — alert correlation, root cause analysis, and postmortem generation.',
+    decisions: [
+      'Ollama local models for data privacy and zero-latency during outages',
+      'Tiered LLM strategy: fast models for classification, large models for reasoning',
+      'Checkpoint-based resumability if the orchestrator itself crashes',
+    ],
+    tech: ['LangGraph', 'LangChain', 'Ollama', 'Docker'],
+    diagramType: 'multi_agent',
+  },
+]
+
 export default function Home() {
   return (
     <>
       <ParticleCanvas />
+      
+      {/* ─── Hero Section ─── */}
       <section className="relative z-10 min-h-screen flex items-center" id="hero-section">
         <div className="container mx-auto px-6 lg:px-16">
           <div className="max-w-3xl page-enter">
@@ -39,11 +71,13 @@ export default function Home() {
               <span className="text-gradient">Agentic AI Engineer</span>
             </h2>
 
-            {/* Subtitle */}
+            {/* Subtitle — concrete, memorable hook */}
             <p className="text-muted-foreground text-base sm:text-lg max-w-xl mb-8 leading-relaxed animate-[fadeIn_1s_1.5s_backwards]">
-              Specialist Programmer at{' '}
-              <span className="text-foreground font-medium">Infosys</span> — Building
-              intelligent multi-agent systems with LangChain, LangGraph & RAG.
+              Building scalable AI systems that{' '}
+              <span className="text-foreground font-medium">audit invoices</span>,{' '}
+              <span className="text-foreground font-medium">orchestrate incident response</span>, and{' '}
+              <span className="text-foreground font-medium">reason autonomously</span> — using
+              LangGraph, RAG & multi-agent architectures.
             </p>
 
             {/* Highlight pills */}
@@ -83,6 +117,83 @@ export default function Home() {
                 <Brain size={40} className="text-primary/60 animate-glow-pulse" />
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── AI Systems I've Built ─── */}
+      <section className="relative z-10 pb-20 px-6 lg:px-16" id="featured-ai-systems">
+        <div className="container mx-auto max-w-6xl">
+          <div className="flex items-center gap-3 mb-10">
+            <div className="w-10 h-10 rounded-xl bg-primary/15 flex items-center justify-center">
+              <Zap size={20} className="text-primary" />
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-bold text-foreground">AI Systems I've Built</h2>
+          </div>
+
+          <div className="space-y-6">
+            {featuredProjects.map((project, idx) => (
+              <Card
+                key={project.title}
+                className="glass glow-border overflow-hidden hover:border-primary/30 transition-all duration-500 group"
+                style={{ animationDelay: `${idx * 0.2}s` }}
+                id={`featured-project-${idx}`}
+              >
+                {/* Top gradient bar */}
+                <div className="h-1 bg-gradient-to-r from-cyan-400 via-primary to-violet-600 opacity-50 group-hover:opacity-100 transition-opacity" />
+
+                <CardContent className="p-6 sm:p-8">
+                  {/* Header */}
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
+                    <h3 className="text-xl sm:text-2xl font-bold text-foreground group-hover:text-primary transition-colors">
+                      {project.title}
+                    </h3>
+                    <div className="flex flex-wrap gap-1.5">
+                      {project.tech.map(t => (
+                        <Badge key={t} variant="glow" className="text-[10px]">{t}</Badge>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Problem statement */}
+                  <div className="flex items-start gap-2 mb-6 p-3 rounded-lg bg-primary/5 border border-primary/10">
+                    <Lightbulb size={16} className="text-primary mt-0.5 shrink-0" />
+                    <p className="text-sm text-foreground/90 leading-relaxed">{project.problem}</p>
+                  </div>
+
+                  {/* Architecture diagram */}
+                  <div className="mb-6">
+                    <p className="text-xs font-mono text-muted-foreground uppercase tracking-wider mb-2">Agent Pipeline</p>
+                    <div className="rounded-xl border border-white/[0.06] bg-background/40 backdrop-blur-sm">
+                      <AgentFlowDiagram type={project.diagramType} compact />
+                    </div>
+                  </div>
+
+                  {/* Architecture decisions */}
+                  <div>
+                    <p className="text-xs font-mono text-primary uppercase tracking-wider mb-3">Architecture Decisions</p>
+                    <ul className="space-y-2">
+                      {project.decisions.map((decision, i) => (
+                        <li key={i} className="text-sm text-muted-foreground flex gap-2">
+                          <span className="text-primary mt-1 shrink-0">▸</span>
+                          <span>{decision}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          {/* See all projects CTA */}
+          <div className="mt-8 text-center">
+            <Button asChild variant="outline" size="lg" className="group" id="see-all-projects">
+              <Link to="/projects">
+                See All Projects & Engineering Details
+                <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </Button>
           </div>
         </div>
       </section>

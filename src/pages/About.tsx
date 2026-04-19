@@ -88,19 +88,26 @@ export default function About() {
           {/* Bio */}
           <div className="space-y-4">
             <p className="text-foreground/90 leading-relaxed">
-              Hi! I'm <span className="text-primary font-semibold">Ved Prakash</span>, a Specialist Programmer at
-              Infosys, focused on building production-grade <span className="text-primary">Agentic AI systems</span>.
-              I design multi-agent architectures using LangChain and LangGraph to solve complex enterprise challenges.
+              I design multi-agent AI systems at <span className="text-primary font-semibold">Infosys</span> that replace
+              hours of manual work with autonomous pipelines. My latest system — an agentic invoice auditor — orchestrates
+              5 specialized agents to process multilingual invoices with <span className="text-primary">99%+ validation accuracy</span>.
             </p>
             <p className="text-muted-foreground leading-relaxed">
-              I graduated from <span className="text-foreground">Birla Institute of Technology, Mesra</span> with a
-              B.Tech in Electrical & Electronics Engineering (CGPA: 8.82). My journey from frontend development to
-              AI engineering reflects my passion for building systems that are both intelligent and beautifully engineered.
+              Before AI engineering, I built full-stack web applications and contributed to open-source projects.
+              I graduated from <span className="text-foreground">Birla Institute of Technology, Mesra</span> (B.Tech, CGPA: 8.82).
+              That full-stack foundation is why I obsess over observability, clean APIs, and systems that are
+              both intelligent and <span className="text-foreground">production-grade</span>.
             </p>
-            <p className="text-muted-foreground leading-relaxed">
-              Currently, I'm building end-to-end agentic AI solutions for enterprise invoice auditing — from
-              specialized extraction agents to Agentic RAG pipelines with FAISS, all monitored through Langfuse observability.
-            </p>
+
+            {/* Engineering Philosophy */}
+            <div className="p-4 rounded-lg bg-primary/5 border border-primary/10 mt-4">
+              <p className="text-xs font-mono text-primary uppercase tracking-wider mb-2">Engineering Philosophy</p>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Every agent I build follows three principles: <span className="text-foreground">observable</span> (Langfuse traces on every decision),
+                <span className="text-foreground"> recoverable</span> (LangGraph checkpoints for crash resilience), and
+                <span className="text-foreground"> human-aware</span> (HITL interrupts for edge cases the model shouldn't handle alone).
+              </p>
+            </div>
           </div>
 
           {/* Spinning Cube */}
@@ -153,22 +160,6 @@ export default function About() {
           ))}
         </div>
 
-        {/* LeetCode Stats */}
-        <div className="grid sm:grid-cols-[1fr_1fr] lg:grid-cols-[350px_1fr] gap-6 mb-16">
-          <LeetCodeStats username="vedprakashsigh" />
-          <Card className="glass glow-border flex items-center">
-            <CardContent className="p-6">
-              <h3 className="text-lg font-semibold text-foreground mb-2">Problem Solving</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                I actively practice competitive programming and DSA on LeetCode to sharpen my
-                algorithmic thinking — skills that directly translate to designing efficient
-                <span className="text-primary"> agent workflows</span> and
-                <span className="text-primary"> data pipelines</span>.
-              </p>
-            </CardContent>
-          </Card>
-        </div>
-
         {/* Experience */}
         <h2 className="text-2xl font-bold text-foreground mb-6">Experience</h2>
         <div className="space-y-4 mb-16">
@@ -193,6 +184,22 @@ export default function About() {
               </CardContent>
             </Card>
           ))}
+        </div>
+
+        {/* LeetCode Stats — below experience */}
+        <div className="grid sm:grid-cols-[1fr_1fr] lg:grid-cols-[350px_1fr] gap-6 mb-16">
+          <LeetCodeStats username="vedprakashsigh" />
+          <Card className="glass glow-border flex items-center">
+            <CardContent className="p-6">
+              <h3 className="text-lg font-semibold text-foreground mb-2">Problem Solving</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                I actively practice competitive programming and DSA on LeetCode to sharpen my
+                algorithmic thinking — skills that directly translate to designing efficient
+                <span className="text-primary"> agent workflows</span> and
+                <span className="text-primary"> data pipelines</span>.
+              </p>
+            </CardContent>
+          </Card>
         </div>
 
         {/* Skills */}
