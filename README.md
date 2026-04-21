@@ -36,7 +36,7 @@ A high-performance, dynamic portfolio website completely rewritten to showcase p
 
 - **Agentic AI Focus:** Engineered to highlight complex, multi-agent AI workflows and enterprise AI solutions over simple frontend apps.
 - **Proof-of-Engineering Case Studies:** AI projects feature comprehensive breakdowns including 'Why I Built This', 'Key Challenges', and 'Architecture Decisions'.
-- **Interactive Graph Diagrams:** Custom HTML/CSS component (`AgentFlowDiagram`) to visually represent stateful, cyclical agent pipelines (e.g., LangGraph).
+- **Interactive Graph Diagrams:** Custom HTML/CSS component (`AgentFlowDiagram`) to visually represent stateful, cyclical agent pipelines (e.g., LangGraph). Fully responsive with smooth horizontal scrolling on mobile devices.
 - **"Neural Dark" Aesthetic:** Highly interactive and dynamic particle neural network background using HTML5 canvas.
 - **Admin Dashboard:** Authenticated custom CMS that permits real-time CRUD operations to adjust project context and portfolio structure.
 - **Live LeetCode Stats:** fully integrated widget pulling live real-time problem-solving metrics directly from LeetCode.

@@ -46,8 +46,8 @@ export default function AgentFlowDiagram({ type, compact = false }: AgentFlowDia
   const textSize = compact ? 'text-[8px] sm:text-[9px]' : 'text-[9px] sm:text-[10px]'
 
   return (
-    <div className="w-full overflow-x-auto py-4" id={`diagram-${type}`}>
-      <div className="flex items-center justify-center gap-0 min-w-[500px] px-4">
+    <div className="w-full overflow-x-auto py-4 scrollbar-thin scrollbar-thumb-primary/10 scrollbar-track-transparent" id={`diagram-${type}`}>
+      <div className="flex items-center justify-center gap-0 w-max min-w-full px-4 sm:px-8">
         {nodes.map((node, idx) => {
           const Icon = node.icon
           return (
