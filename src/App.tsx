@@ -5,6 +5,8 @@ import About from '@/pages/About'
 import Projects from '@/pages/Projects'
 import Resume from '@/pages/Resume'
 import Contact from '@/pages/Contact'
+import Blog from '@/pages/Blog'
+import BlogPost from '@/pages/BlogPost'
 import Dashboard from '@/pages/Dashboard'
 
 function App() {
@@ -16,6 +18,8 @@ function App() {
         <Route path="projects" element={<Projects />} />
         <Route path="resume" element={<Resume />} />
         <Route path="contact" element={<Contact />} />
+        <Route path="blog" element={<Blog />} />
+        <Route path="blog/:slug" element={<BlogPost />} />
       </Route>
       <Route path="/dashboard/*" element={<Dashboard />} />
     </Routes>

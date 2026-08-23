@@ -2,7 +2,8 @@ import { useState } from 'react'
 import { NavLink, Link, Outlet } from 'react-router-dom'
 import {
   Home, User, FolderKanban, FileText, Mail,
-  Linkedin, Github, ExternalLink, Menu, X, Download
+  Linkedin, Github, ExternalLink, Menu, X, Download,
+  BookOpen
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
@@ -12,6 +13,7 @@ const navItems = [
   { to: '/', icon: Home, label: 'Home', end: true },
   { to: '/about', icon: User, label: 'About' },
   { to: '/projects', icon: FolderKanban, label: 'Projects' },
+  { to: '/blog', icon: BookOpen, label: 'Blog' },
   { to: '/resume', icon: FileText, label: 'Resume' },
   { to: '/contact', icon: Mail, label: 'Contact' },
 ]

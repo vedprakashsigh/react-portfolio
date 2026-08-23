@@ -69,6 +69,29 @@ export interface Profile {
   resume_url: string
 }
 
+export interface Blog {
+  id: string
+  title: string
+  slug: string
+  excerpt: string
+  content: string
+  cover_image: string
+  author: string
+  published_at: string
+  created_at: string
+  is_published: boolean
+  read_time_minutes: number
+}
+
+export interface BlogComment {
+  id: string
+  blog_id: string
+  name: string
+  message: string
+  is_approved: boolean
+  created_at: string
+}
+
 // ─── Data Fetchers ──────────────────────────────────────
 
 export async function getProjects(): Promise<Project[]> {
@@ -142,4 +165,98 @@ export async function getProfile(): Promise<Profile | null> {
     return null
   }
   return data
+}
+
+// ─── Blog Functions ───────────────────────────────────────
+
+export async function getBlogs(): Promise<Blog[]> {
+  const { data, error } = await supabase
+    .from('blogs')
+    .select('*')
+    .eq('is_published', true)
+    .order('published_at', { ascending: false })
+  if (error) {
+    console.error('Error fetching blogs:', error)
+    return []
+  }
+  return data || []
+}
+
+export async function getBlogBySlug(slug: string): Promise<Blog | null> {
+  const { data, error } = await supabase
+    .from('blogs')
+    .select('*')
+    .eq('slug', slug)
+    .eq('is_published', true)
+    .single()
+  if (error) {
+    console.error('Error fetching blog:', error)
+    return null
+  }
+  return data
+}
+
+export async function getBlogLikes(blogId: string): Promise<number> {
+  const { count, error } = await supabase
+    .from('blog_likes')
+    .select('*', { count: 'exact', head: true })
+    .eq('blog_id', blogId)
+  if (error) {
+    console.error('Error fetching likes:', error)
+    return 0
+  }
+  return count || 0
+}
+
+export async function hasUserLiked(blogId: string, sessionId: string): Promise<boolean> {
+  const { data, error } = await supabase
+    .from('blog_likes')
+    .select('*')
+    .eq('blog_id', blogId)
+    .eq('session_id', sessionId)
+    .single()
+  if (error) return false
+  return !!data
+}
+
+export async function toggleLike(blogId: string, sessionId: string): Promise<{ liked: boolean; totalLikes: number }> {
+  // Check if already liked
+  const existing = await hasUserLiked(blogId, sessionId)
+
+  if (existing) {
+    // Unlike
+    await supabase.from('blog_likes').delete().eq('blog_id', blogId).eq('session_id', sessionId)
+    const total = await getBlogLikes(blogId)
+    return { liked: false, totalLikes: total }
+  } else {
+    // Like
+    await supabase.from('blog_likes').insert({ blog_id: blogId, session_id: sessionId })
+    const total = await getBlogLikes(blogId)
+    return { liked: true, totalLikes: total }
+  }
+}
+
+export async function getBlogComments(blogId: string): Promise<BlogComment[]> {
+  const { data, error } = await supabase
+    .from('blog_comments')
+    .select('*')
+    .eq('blog_id', blogId)
+    .eq('is_approved', true)
+    .order('created_at', { ascending: false })
+  if (error) {
+    console.error('Error fetching comments:', error)
+    return []
+  }
+  return data || []
+}
+
+export async function addBlogComment(blogId: string, name: string, message: string): Promise<boolean> {
+  const { error } = await supabase
+    .from('blog_comments')
+    .insert({ blog_id: blogId, name, message })
+  if (error) {
+    console.error('Error adding comment:', error)
+    return false
+  }
+  return true
 }

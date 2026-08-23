@@ -114,6 +114,64 @@ CREATE POLICY "Auth delete certifications" ON certifications FOR DELETE TO authe
 CREATE POLICY "Auth insert profile" ON profile FOR INSERT TO authenticated WITH CHECK (true);
 CREATE POLICY "Auth update profile" ON profile FOR UPDATE TO authenticated USING (true);
 
+-- Blog posts table
+CREATE TABLE IF NOT EXISTS blogs (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  title TEXT NOT NULL,
+  slug TEXT NOT NULL UNIQUE,
+  excerpt TEXT DEFAULT '',
+  content TEXT NOT NULL,
+  cover_image TEXT DEFAULT '',
+  author TEXT DEFAULT 'Ved Prakash',
+  published_at TIMESTAMPTZ DEFAULT NOW(),
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  is_published BOOLEAN DEFAULT false,
+  read_time_minutes INT DEFAULT 5
+);
+
+-- Blog likes (anonymous, one per blog per session)
+CREATE TABLE IF NOT EXISTS blog_likes (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  blog_id UUID NOT NULL REFERENCES blogs(id) ON DELETE CASCADE,
+  session_id TEXT NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  UNIQUE(blog_id, session_id)
+);
+
+-- Blog comments (anonymous, unique name per blog)
+CREATE TABLE IF NOT EXISTS blog_comments (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  blog_id UUID NOT NULL REFERENCES blogs(id) ON DELETE CASCADE,
+  name TEXT NOT NULL,
+  message TEXT NOT NULL,
+  is_approved BOOLEAN DEFAULT true,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  UNIQUE(blog_id, name)
+);
+
+-- Enable RLS
+ALTER TABLE blogs ENABLE ROW LEVEL SECURITY;
+ALTER TABLE blog_likes ENABLE ROW LEVEL SECURITY;
+ALTER TABLE blog_comments ENABLE ROW LEVEL SECURITY;
+
+-- Public read
+CREATE POLICY "Public read blogs" ON blogs FOR SELECT USING (true);
+CREATE POLICY "Public read blog_likes" ON blog_likes FOR SELECT USING (true);
+CREATE POLICY "Public read blog_comments" ON blog_comments FOR SELECT USING (is_approved = true);
+
+-- Public insert (likes and comments)
+CREATE POLICY "Public insert blog_likes" ON blog_likes FOR INSERT WITH CHECK (true);
+CREATE POLICY "Public insert blog_comments" ON blog_comments FOR INSERT WITH CHECK (true);
+
+-- Authenticated write (only logged-in users can modify blogs)
+CREATE POLICY "Auth insert blogs" ON blogs FOR INSERT TO authenticated WITH CHECK (true);
+CREATE POLICY "Auth update blogs" ON blogs FOR UPDATE TO authenticated USING (true);
+CREATE POLICY "Auth delete blogs" ON blogs FOR DELETE TO authenticated USING (true);
+
+-- Authenticated can approve/delete comments
+CREATE POLICY "Auth update blog_comments" ON blog_comments FOR UPDATE TO authenticated USING (true);
+CREATE POLICY "Auth delete blog_comments" ON blog_comments FOR DELETE TO authenticated USING (true);
+
 -- ═══════════════════════════════════════════════════════════
 -- Storage: Create an 'uploads' bucket in Supabase Dashboard
 -- Dashboard > Storage > New Bucket > Name: "uploads" > Public: ON
