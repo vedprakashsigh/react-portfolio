@@ -176,3 +176,24 @@ CREATE POLICY "Auth delete blog_comments" ON blog_comments FOR DELETE TO authent
 -- Storage: Create an 'uploads' bucket in Supabase Dashboard
 -- Dashboard > Storage > New Bucket > Name: "uploads" > Public: ON
 -- ═══════════════════════════════════════════════════════════
+
+-- Storage policies for 'uploads' bucket
+-- Allow authenticated users to upload files
+CREATE POLICY "Authenticated users can upload files" ON storage.objects
+  FOR INSERT TO authenticated
+  WITH CHECK (bucket_id = 'uploads');
+
+-- Allow authenticated users to update their uploads
+CREATE POLICY "Authenticated users can update own files" ON storage.objects
+  FOR UPDATE TO authenticated
+  USING (bucket_id = 'uploads' AND auth.uid() = owner);
+
+-- Allow authenticated users to delete their uploads
+CREATE POLICY "Authenticated users can delete own files" ON storage.objects
+  FOR DELETE TO authenticated
+  USING (bucket_id = 'uploads' AND auth.uid() = owner);
+
+-- Allow public read access to uploaded files
+CREATE POLICY "Public read access" ON storage.objects
+  FOR SELECT
+  USING (bucket_id = 'uploads');
