@@ -10,6 +10,108 @@ import { Separator } from '@/components/ui/separator'
 import ParticleCanvas from '@/components/ParticleCanvas'
 import { getBlogBySlug, getBlogLikes, hasUserLiked, toggleLike, getBlogComments, addBlogComment, type Blog, type BlogComment } from '@/lib/supabase'
 
+// Custom markdown components for enhanced rendering without external dependencies
+const markdownComponents = {
+  // Enhanced table styling
+  table: ({ children }: any) => (
+    <div className="overflow-x-auto my-6 rounded-lg border border-border">
+      <table className="min-w-full divide-y divide-border bg-card/50 backdrop-blur-sm">
+        {children}
+      </table>
+    </div>
+  ),
+  thead: ({ children }: any) => (
+    <thead className="bg-muted/50">{children}</thead>
+  ),
+  tbody: ({ children }: any) => (
+    <tbody className="divide-y divide-border">{children}</tbody>
+  ),
+  th: ({ children }: any) => (
+    <th className="px-4 py-3 text-left text-xs font-semibold text-foreground uppercase tracking-wider border-b border-border bg-primary/5">
+      {children}
+    </th>
+  ),
+  td: ({ children }: any) => (
+    <td className="px-4 py-3 text-sm text-foreground/90 align-top">{children}</td>
+  ),
+  tr: ({ children, ...props }: any) => (
+    <tr className="hover:bg-muted/30 transition-colors" {...props}>
+      {children}
+    </tr>
+  ),
+  // Enhanced code blocks
+  code: ({ inline, className, children, ...props }: any) => {
+    if (inline) {
+      return (
+        <code
+          className="px-1.5 py-0.5 rounded-md bg-primary/10 text-cyan-300 text-sm font-mono"
+          {...props}
+        >
+          {children}
+        </code>
+      )
+    }
+    return (
+      <code
+        className={`block overflow-x-auto p-4 rounded-lg bg-slate-900/80 text-sm font-mono leading-relaxed ${className || ''}`}
+        {...props}
+      >
+        {children}
+      </code>
+    )
+  },
+  pre: ({ children }: any) => (
+    <pre className="my-4 rounded-lg shadow-lg shadow-black/20">{children}</pre>
+  ),
+  // Enhanced blockquotes (callouts)
+  blockquote: ({ children }: any) => (
+    <blockquote className="border-l-4 border-primary bg-primary/5 rounded-r-lg px-4 py-3 my-6 not-italic [&>p]:m-0 [&>p]:text-foreground/90">
+      {children}
+    </blockquote>
+  ),
+  // Better heading spacing
+  h2: ({ children }: any) => (
+    <h2 className="text-2xl font-bold text-foreground mt-10 mb-4 pb-2 border-b border-border/50 flex items-center gap-2">
+      {children}
+    </h2>
+  ),
+  h3: ({ children }: any) => (
+    <h3 className="text-xl font-semibold text-foreground mt-8 mb-3 flex items-center gap-2">
+      {children}
+    </h3>
+  ),
+  // Better paragraph spacing
+  p: ({ children }: any) => (
+    <p className="my-4 leading-7 text-foreground/90">{children}</p>
+  ),
+  // Better list styling
+  ul: ({ children }: any) => (
+    <ul className="my-4 space-y-2 pl-2 list-disc list-inside marker:text-primary">{children}</ul>
+  ),
+  ol: ({ children }: any) => (
+    <ol className="my-4 space-y-2 pl-2 list-decimal list-inside marker:text-primary">{children}</ol>
+  ),
+  li: ({ children }: any) => (
+    <li className="leading-7 text-foreground/90">{children}</li>
+  ),
+  // Enhanced links
+  a: ({ href, children }: any) => (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-cyan-400 hover:text-cyan-300 underline decoration-dotted underline-offset-4 transition-colors"
+    >
+      {children}
+    </a>
+  ),
+  // Inline code in headings/lists handled above; strong emphasis
+  strong: ({ children }: any) => (
+    <strong className="font-semibold text-foreground">{children}</strong>
+  ),
+  hr: () => <hr className="my-8 border-border" />,
+}
+
 export default function BlogPost() {
   const { slug } = useParams<{ slug: string }>()
   const [blog, setBlog] = useState<Blog | null>(null)
@@ -188,7 +290,9 @@ export default function BlogPost() {
 
           {/* Markdown Content */}
           <article className="prose prose-invert prose-cyan max-w-none mb-12">
-            <ReactMarkdown>{blog.content}</ReactMarkdown>
+            <ReactMarkdown components={markdownComponents}>
+              {blog.content}
+            </ReactMarkdown>
           </article>
 
           <Separator className="mb-8" />
