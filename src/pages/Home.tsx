@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight, Sparkles, Bot, Brain, Workflow, Lightbulb, Zap } from 'lucide-react'
+import { ArrowRight, Sparkles, Bot, Brain, Workflow, Lightbulb, Zap, FileText } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -40,6 +40,12 @@ const featuredProjects = [
     diagramType: 'multi_agent',
   },
 ]
+
+const publication = {
+  title: 'Trust-Aware Agentic RAG: A Guardrailed, Self-Evaluating Multi-Agent Architecture for Enterprise Knowledge Assistants',
+  journal: 'IJSREM, Volume 10 Issue 08 (Aug 2026)',
+  url: '/research/trust-aware-agentic-rag.pdf',
+}
 
 export default function Home() {
   return (
@@ -94,6 +100,20 @@ export default function Home() {
             </div>
 
             {/* CTA */}
+            <div className="mb-6 p-4 rounded-xl bg-cyan-500/5 border border-cyan-400/20 animate-[fadeIn_1s_2.1s_backwards]">
+              <p className="text-[11px] font-mono text-cyan-300 uppercase tracking-[0.2em] mb-2">New Publication</p>
+              <p className="text-sm text-foreground/90 leading-relaxed mb-3">{publication.title}</p>
+              <a
+                href={publication.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-sm text-primary hover:text-cyan-300 transition-colors"
+              >
+                <FileText size={14} />
+                Read full paper ({publication.journal})
+              </a>
+            </div>
+
             <div className="flex gap-4 animate-[fadeIn_1s_2.3s_backwards]">
               <Button asChild size="lg" className="btn-shimmer font-semibold group" id="cta-contact">
                 <Link to="/contact">

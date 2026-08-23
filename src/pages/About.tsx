@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Bot, Brain, Network, Cpu, Code2, Database, Container, GitBranch } from 'lucide-react'
+import { Bot, Brain, Network, Cpu, Code2, Database, Container, GitBranch, FileText, ExternalLink } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
@@ -65,6 +65,14 @@ const cubeIcons = [
   { icon: Container, label: 'Docker', color: '#00f0ff', contentRotate: '0deg' },
   { icon: GitBranch, label: 'Git', color: '#7c3aed', contentRotate: '0deg' },
 ]
+
+const publication = {
+  title: 'Trust-Aware Agentic RAG: A Guardrailed, Self-Evaluating Multi-Agent Architecture for Enterprise Knowledge Assistants',
+  venue: 'International Journal of Scientific Research in Engineering and Management (IJSREM)',
+  issue: 'Volume 10, Issue 08, August 2026',
+  authorNote: 'Ved Prakash, Independent Researcher, India',
+  url: '/research/trust-aware-agentic-rag.pdf',
+}
 
 export default function About() {
   const [skills, setSkills] = useState<Skill[]>(fallbackSkills)
@@ -185,6 +193,32 @@ export default function About() {
             </Card>
           ))}
         </div>
+
+        {/* Research Publication */}
+        <h2 className="text-2xl font-bold text-foreground mb-6">Research Publication</h2>
+        <Card className="glass glow-border hover:border-primary/30 transition-all mb-16">
+          <CardContent className="p-6">
+            <div className="flex items-start justify-between gap-4 mb-3">
+              <div>
+                <p className="text-xs font-mono text-primary uppercase tracking-wider mb-2">Peer-Reviewed</p>
+                <h3 className="text-lg font-semibold text-foreground leading-snug">{publication.title}</h3>
+              </div>
+              <FileText size={20} className="text-primary shrink-0 mt-1" />
+            </div>
+            <p className="text-sm text-muted-foreground mb-1">{publication.venue}</p>
+            <p className="text-sm text-muted-foreground mb-1">{publication.issue}</p>
+            <p className="text-sm text-muted-foreground mb-4">{publication.authorNote}</p>
+            <a
+              href={publication.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-sm text-primary hover:text-cyan-300 transition-colors"
+            >
+              Read Publication
+              <ExternalLink size={14} />
+            </a>
+          </CardContent>
+        </Card>
 
         {/* LeetCode Stats — below experience */}
         <div className="grid sm:grid-cols-[1fr_1fr] lg:grid-cols-[350px_1fr] gap-6 mb-16">
