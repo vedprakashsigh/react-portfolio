@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 import { ArrowLeft, Clock, User, Calendar, Heart, MessageCircle, Send } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -10,7 +11,7 @@ import { Separator } from '@/components/ui/separator'
 import ParticleCanvas from '@/components/ParticleCanvas'
 import { getBlogBySlug, getBlogLikes, hasUserLiked, toggleLike, getBlogComments, addBlogComment, type Blog, type BlogComment } from '@/lib/supabase'
 
-// Custom markdown components for enhanced rendering without external dependencies
+// Custom markdown components for enhanced rendering
 const markdownComponents = {
   // Enhanced table styling
   table: ({ children }: any) => (
@@ -290,7 +291,10 @@ export default function BlogPost() {
 
           {/* Markdown Content */}
           <article className="prose prose-invert prose-cyan max-w-none mb-12">
-            <ReactMarkdown components={markdownComponents}>
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              components={markdownComponents}
+            >
               {blog.content}
             </ReactMarkdown>
           </article>
