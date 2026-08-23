@@ -260,3 +260,58 @@ export async function addBlogComment(blogId: string, name: string, message: stri
   }
   return true
 }
+
+// ─── Blog Admin Functions ─────────────────────────────────────
+
+export async function getAllBlogs(): Promise<Blog[]> {
+  const { data, error } = await supabase
+    .from('blogs')
+    .select('*')
+    .order('published_at', { ascending: false })
+  if (error) {
+    console.error('Error fetching all blogs:', error)
+    return []
+  }
+  return data || []
+}
+
+export async function saveBlog(blog: Partial<Blog>): Promise<boolean> {
+  const { error } = await supabase
+    .from('blogs')
+    .upsert(blog)
+  if (error) {
+    console.error('Error saving blog:', error)
+    return false
+  }
+  return true
+}
+
+export async function deleteBlog(id: string): Promise<boolean> {
+  const { error } = await supabase
+    .from('blogs')
+    .delete()
+    .eq('id', id)
+  if (error) {
+    console.error('Error deleting blog:', error)
+    return false
+  }
+  return true
+}
+
+export async function uploadBlogImage(file: File): Promise<string | null> {
+  const fileName = `blogs/${Date.now()}-${file.name.replace(/\s+/g, '-')}`
+  const { data, error } = await supabase.storage
+    .from('uploads')
+    .upload(fileName, file)
+
+  if (error) {
+    console.error('Error uploading image:', error)
+    return null
+  }
+
+  const { data: { publicUrl } } = supabase.storage
+    .from('uploads')
+    .getPublicUrl(fileName)
+
+  return publicUrl
+}

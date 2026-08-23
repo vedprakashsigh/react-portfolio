@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import type { User } from '@supabase/supabase-js'
-import { supabase, type Project, type Experience, type Education, type Skill, type Certification, type Profile } from '@/lib/supabase'
+import { supabase, type Project, type Experience, type Education, type Skill, type Certification, type Profile, type Blog, getAllBlogs, saveBlog, deleteBlog, uploadBlogImage } from '@/lib/supabase'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -10,7 +10,8 @@ import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
 import {
   LogOut, Plus, Trash2, Save, FolderKanban, Briefcase,
-  GraduationCap, Wrench, Award, UserCircle, Upload, ArrowLeft
+  GraduationCap, Wrench, Award, UserCircle, Upload, ArrowLeft,
+  BookOpen, Image
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
@@ -117,17 +118,21 @@ export default function AdminPanel({ user }: AdminProps) {
   const [skills, setSkills] = useState<Skill[]>([])
   const [certifications, setCertifications] = useState<Certification[]>([])
   const [profile, setProfile] = useState<Profile | null>(null)
+  const [blogs, setBlogs] = useState<Blog[]>([])
   const [profileSaving, setProfileSaving] = useState(false)
   const [resumeUploading, setResumeUploading] = useState(false)
+  const [blogSaving, setBlogSaving] = useState(false)
+  const [blogImageUploading, setBlogImageUploading] = useState(false)
 
   const loadAll = useCallback(async () => {
-    const [p, ex, ed, sk, cr, pr] = await Promise.all([
+    const [p, ex, ed, sk, cr, pr, bl] = await Promise.all([
       supabase.from('projects').select('*').order('sort_order'),
       supabase.from('experience').select('*').order('sort_order'),
       supabase.from('education').select('*').order('sort_order'),
       supabase.from('skills').select('*').order('sort_order'),
       supabase.from('certifications').select('*').order('sort_order'),
       supabase.from('profile').select('*').eq('id', 1).single(),
+      getAllBlogs(),
     ])
     if (p.data) setProjects(p.data)
     if (ex.data) setExperience(ex.data)
@@ -135,6 +140,7 @@ export default function AdminPanel({ user }: AdminProps) {
     if (sk.data) setSkills(sk.data)
     if (cr.data) setCertifications(cr.data)
     if (pr.data) setProfile(pr.data)
+    setBlogs(bl)
   }, [])
 
   useEffect(() => { loadAll() }, [loadAll])
@@ -193,12 +199,13 @@ export default function AdminPanel({ user }: AdminProps) {
       {/* Content */}
       <div className="container mx-auto px-6 py-8 max-w-4xl">
         <Tabs defaultValue="projects">
-          <TabsList className="grid grid-cols-3 sm:grid-cols-6 w-full mb-8">
+          <TabsList className="grid grid-cols-3 sm:grid-cols-7 w-full mb-8">
             <TabsTrigger value="projects"><FolderKanban size={14} className="mr-1 hidden sm:inline" />Projects</TabsTrigger>
             <TabsTrigger value="experience"><Briefcase size={14} className="mr-1 hidden sm:inline" />Experience</TabsTrigger>
             <TabsTrigger value="education"><GraduationCap size={14} className="mr-1 hidden sm:inline" />Education</TabsTrigger>
             <TabsTrigger value="skills"><Wrench size={14} className="mr-1 hidden sm:inline" />Skills</TabsTrigger>
             <TabsTrigger value="certs"><Award size={14} className="mr-1 hidden sm:inline" />Certs</TabsTrigger>
+            <TabsTrigger value="blogs"><BookOpen size={14} className="mr-1 hidden sm:inline" />Blogs</TabsTrigger>
             <TabsTrigger value="profile"><UserCircle size={14} className="mr-1 hidden sm:inline" />Profile</TabsTrigger>
           </TabsList>
 
@@ -327,6 +334,75 @@ export default function AdminPanel({ user }: AdminProps) {
                 <div>
                   <p className="font-medium text-foreground">{item.title}</p>
                   {item.issuer && <p className="text-xs text-muted-foreground">{item.issuer}</p>}
+                </div>
+              )}
+            />
+          </TabsContent>
+
+          {/* ── BLOGS ── */}
+          <TabsContent value="blogs">
+            <CrudSection<Blog>
+              tableName="blogs"
+              items={blogs}
+              reload={loadAll}
+              emptyItem={{ title: '', slug: '', excerpt: '', content: '', cover_image: '', author: 'Ved Prakash', published_at: new Date().toISOString(), created_at: new Date().toISOString(), is_published: false, read_time_minutes: 5 }}
+              renderForm={(item, onChange) => (
+                <div className="space-y-3">
+                  <div className="space-y-1"><Label>Title</Label><Input value={item.title} onChange={e => onChange({ ...item, title: e.target.value, slug: item.slug || e.target.value.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '') })} /></div>
+                  <div className="space-y-1"><Label>Slug (URL)</Label><Input value={item.slug} onChange={e => onChange({ ...item, slug: e.target.value })} placeholder="my-blog-post" /></div>
+                  <div className="space-y-1"><Label>Excerpt (short summary)</Label><Textarea value={item.excerpt} onChange={e => onChange({ ...item, excerpt: e.target.value })} className="min-h-[80px]" /></div>
+                  <div className="space-y-1"><Label>Content (Markdown supported)</Label><Textarea value={item.content} onChange={e => onChange({ ...item, content: e.target.value })} className="min-h-[200px] font-mono text-sm" /></div>
+
+                  {/* Cover Image Upload */}
+                  <div className="space-y-2">
+                    <Label>Cover Image</Label>
+                    <div className="flex gap-2 items-center">
+                      <Input
+                        value={item.cover_image}
+                        onChange={e => onChange({ ...item, cover_image: e.target.value })}
+                        placeholder="https://..."
+                        className="flex-1"
+                      />
+                      <Input
+                        type="file"
+                        accept="image/*"
+                        className="max-w-[140px]"
+                        onChange={async (e) => {
+                          const file = e.target.files?.[0]
+                          if (file) {
+                            setBlogImageUploading(true)
+                            const url = await uploadBlogImage(file)
+                            if (url) {
+                              onChange({ ...item, cover_image: url })
+                            }
+                            setBlogImageUploading(false)
+                          }
+                        }}
+                      />
+                      {blogImageUploading && (
+                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                          <div className="w-4 h-4 border-2 border-primary/30 border-t-primary rounded-full animate-spin" />
+                        </div>
+                      )}
+                      {item.cover_image && (
+                        <div className="w-10 h-10 rounded overflow-hidden border border-white/10">
+                          <img src={item.cover_image} alt="Preview" className="w-full h-full object-cover" />
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-3 gap-3">
+                    <div className="space-y-1"><Label>Read Time (min)</Label><Input type="number" value={item.read_time_minutes} onChange={e => onChange({ ...item, read_time_minutes: parseInt(e.target.value) || 5 })} /></div>
+                    <div className="space-y-1"><Label>Author</Label><Input value={item.author} onChange={e => onChange({ ...item, author: e.target.value })} /></div>
+                    <div className="space-y-1"><Label>Published</Label><div className="flex items-center h-10"><input type="checkbox" checked={item.is_published} onChange={e => onChange({ ...item, is_published: e.target.checked })} className="w-4 h-4" /></div></div>
+                  </div>
+                </div>
+              )}
+              renderItem={(item) => (
+                <div>
+                  <p className="font-medium text-foreground">{item.title}</p>
+                  <p className="text-xs text-muted-foreground">/{item.slug} • {item.is_published ? '✅ Published' : 'Draft'} • {item.read_time_minutes} min</p>
                 </div>
               )}
             />
