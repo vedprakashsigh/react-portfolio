@@ -1,0 +1,561 @@
+%-------------------------
+% Resume in Latex
+%------------------------
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{fontawesome5}
+\usepackage{multicol}
+\usepackage{amsmath}
+\setlength{\multicolsep}{-3.0pt}
+\setlength{\columnsep}{-1pt}
+\input{glyphtounicode}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\addtolength{\oddsidemargin}{-0.6in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1.19in}
+\addtolength{\topmargin}{-.7in}
+\addtolength{\textheight}{1.4in}
+
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+\setlength{\footskip}{4.08003pt}
+
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large\bfseries
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+\pdfgentounicode=1
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{\item\small{{#1 \vspace{-2pt}}}}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+  \begin{tabular*}{1.0\textwidth}[t]{l@{\extracolsep{\fill}}r}
+    \textbf{#1} & \textbf{\small #2} \\
+    \textit{\small#3} & \textit{\small #4} \\
+  \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+  \item
+  \begin{tabular*}{1.001\textwidth}{l@{\extracolsep{\fill}}r}
+    \small#1 & \textbf{\small #2}\\
+  \end{tabular*}\vspace{-7pt}
+}
+
+\renewcommand\labelitemi{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.0in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%-------------------------------------------
+
+\begin{document}
+
+\begin{center}
+    {\Huge \scshape Ved Prakash} \\ \vspace{1pt}
+    Lucknow, India \\ \vspace{1pt}
+    \small \faPhone\ +91-7752911254 ~ 
+    \href{mailto:hi@vedprakash.me}{\faEnvelope\ \underline{hi@vedprakash.me}} ~ 
+    \href{https://linkedin.com/in/vedprakashsigh/}{\faLinkedin\ \underline{linkedin.com/in/vedprakashsigh}}  ~
+    \href{https://github.com/vedprakashsigh/}{\faGithub\ \underline{github.com/vedprakashsigh}}
+\end{center}
+
+%-----------EDUCATION-----------
+\section{Education}
+\resumeSubHeadingListStart
+\resumeSubheading
+{Birla Institute of Technology}{December 2021 – August 2025}
+{Bachelor of Technology | Electrical and Electronics Engineering }{Ranchi, Jharkhand}
+\resumeSubHeadingListEnd
+
+\begin{itemize}[leftmargin=0.0in, label={}]
+\small{\item{\text{CGPA}{: 8.82}}}
+\end{itemize}
+
+\vspace{-10pt}
+
+%-----------RESEARCH----------
+\section{Research}
+\resumeSubHeadingListStart
+\resumeProjectHeading
+{\textbf{Trust-Aware Agentic RAG: A Guardrailed, Self-Evaluating Multi-Agent Architecture for Enterprise Knowledge Assistants}}{August 2026}
+\resumeItemListStart
+\resumeItem{Published in \textbf{IJSREM}, Vol. 10, Issue 08}
+\resumeItem{Novel architecture combining RAG with multi-agent systems, trust scoring, and self-evaluation for enterprise AI assistants}
+\resumeItemListEnd
+\resumeSubHeadingListEnd
+
+\vspace{-10pt}
+
+%-----------Experience-----------
+\section{Experience}
+\resumeSubHeadingListStart
+
+\resumeProjectHeading
+{\textbf{Infosys Limited} $|$ \emph{Specialist Programmer (Agentic AI)}}{October 2025 – Present}
+\resumeItemListStart
+\resumeItem{Designed end-to-end \textbf{agentic AI system} for invoice auditing using \textbf{LangChain} and \textbf{LangGraph}}
+\resumeItem{Built specialized agents for extraction, translation, ERP validation, and reporting}
+\resumeItem{Implemented \textbf{Agentic RAG} with FAISS for contextual Q\&A; integrated \textbf{MCP} and \textbf{HITL}}
+\resumeItem{Enabled observability via \textbf{Langfuse}; built Streamlit dashboards for audit insights}
+\resumeItemListEnd
+
+\resumeProjectHeading
+{\textbf{SRDT} $|$ \emph{Intern – Software QA \& Full Stack}}{January 2025 – May 2025}
+\resumeItemListStart
+\resumeItem{Manual testing (functional, regression, usability), test cases, and bug documentation}
+\resumeItem{Frontend (React.js) and backend (Java Spring Boot) development, API integration}
+\resumeItem{Supported Agile environment with sprint planning and code reviews}
+\resumeItemListEnd
+
+\resumeSubHeadingListEnd
+
+\vspace{-10pt}
+
+%-----------PROJECTS-----------
+\section{Projects} 
+\vspace{-5pt}
+\resumeSubHeadingListStart
+
+\resumeProjectHeading
+{\textbf{EEESoc Website} $|$ \emph{NextJS, MongoDB, GitHub OAuth} $|$ \href{https://eeesocbit.com/}{\underline{Live}}}{December 2023}
+\resumeItemListStart
+\resumeItem{Built club website with \textbf{3 devs}, serving 100+ users; led admin dashboard for CRUD}
+\resumeItem{Integrated GitHub OAuth; improved deployment speed by 20\% with CI}
+\resumeItemListEnd
+
+\resumeProjectHeading
+{\textbf{Issue Monitor} $|$ \emph{Flask, React, TypeScript, PostgresDB}}{July 2024}
+\resumeItemListStart
+\resumeItem{Developed issue tracker with role-based access (Admin, PM, Member)}
+\resumeItem{Built admin dashboard; implemented dark/light themes}
+\resumeItemListEnd
+
+\resumeSubHeadingListEnd
+
+\vspace{-10pt}
+
+
+%-----------SKILLS-----------
+\section{Skills}
+\vspace{-5pt}
+\resumeSubHeadingListStart
+\resumeItemListStart[leftmargin=0.25in]
+
+\resumeItem{\textbf{Languages}{: Python, JavaScript, TypeScript, HTML, CSS}}
+\resumeItem{\textbf{AI / ML}{: LangChain, LangGraph, Agentic RAG, FAISS, AWS Bedrock, MCP, HITL, LLM Apps}}
+\resumeItem{\textbf{Frameworks}{: ReactJS, NextJS, Flask, Streamlit} \quad \textbf{Databases}{: MongoDB, PostgreSQL, MySQL}}
+\resumeItem{\textbf{Tools}{: Git, GitHub, Langfuse, Docker} \quad \textbf{Fundamentals}{: OOP, DBMS, DSA}}
+
+\resumeItemListEnd
+\resumeSubHeadingListEnd
+
+\vspace{-10pt}
+
+%-----------CERTIFICATIONS-----------
+\section{Certifications}
+\resumeSubHeadingListStart
+\resumeItemListStart[leftmargin=0.25in]
+
+\resumeItem{Infosys Certified Generative AI Professional - Intermediate}
+\resumeItem{LangGraph for Developers and Architects \quad\bullet\quad Python Microservices (FastAPI) \quad\bullet\quad DSA (Python)}
+
+\resumeItemListEnd
+\resumeSubHeadingListEnd
+
+\vspace{-10pt}
+
+\end{document}
+
+
+
+
+
+% %-------------------------
+% % Resume in Latex
+% % Author : Jake Gutierrez
+% % Based off of: https://github.com/sb2nov/resume
+% % License : MIT
+% %------------------------
+
+% \documentclass[letterpaper,11pt]{article}
+
+% \usepackage{latexsym}
+% \usepackage[empty]{fullpage}
+% \usepackage{titlesec}
+% \usepackage{marvosym}
+% \usepackage[usenames,dvipsnames]{color}
+% \usepackage{verbatim}
+% \usepackage{enumitem}
+% \usepackage[hidelinks]{hyperref}
+% \usepackage{fancyhdr}
+% \usepackage[english]{babel}
+% \usepackage{tabularx}
+% \usepackage{fontawesome5}
+% \usepackage{multicol}
+% \usepackage{amsmath}
+% \setlength{\multicolsep}{-3.0pt}
+% \setlength{\columnsep}{-1pt}
+% \input{glyphtounicode}
+
+
+% %----------FONT OPTIONS----------
+% % sans-serif
+% % \usepackage[sfdefault]{FiraSans}
+% % \usepackage[sfdefault]{roboto}
+% % \usepackage[sfdefault]{noto-sans}
+% % \usepackage[default]{sourcesanspro}
+
+% % serif
+% % \usepackage{CormorantGaramond}
+% % \usepackage{charter}
+
+
+% \pagestyle{fancy}
+% \fancyhf{} % clear all header and footer fields
+% \fancyfoot{}
+% \renewcommand{\headrulewidth}{0pt}
+% \renewcommand{\footrulewidth}{0pt}
+
+% % Adjust margins
+% \addtolength{\oddsidemargin}{-0.6in}
+% \addtolength{\evensidemargin}{-0.5in}
+% \addtolength{\textwidth}{1.19in}
+% \addtolength{\topmargin}{-.7in}
+% \addtolength{\textheight}{1.4in}
+
+% \urlstyle{same}
+
+% \raggedbottom
+% \raggedright
+% \setlength{\tabcolsep}{0in}
+% \setlength{\footskip}{4.08003pt}
+
+% % Sections formatting
+% \titleformat{\section}{
+%   \vspace{-4pt}\scshape\raggedright\large\bfseries
+% }{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+% % Ensure that generate pdf is machine readable/ATS parsable
+% \pdfgentounicode=1
+
+% %-------------------------
+% % Custom commands
+% \newcommand{\resumeItem}[1]{
+%   \item\small{
+%     {#1 \vspace{-2pt}}
+%   }
+% }
+
+% \newcommand{\classesList}[4]{
+%     \item\small{
+%         {#1 #2 #3 #4 \vspace{-2pt}}
+%   }
+% }
+
+% \newcommand{\resumeSubheading}[4]{
+%   \vspace{-2pt}\item
+%     \begin{tabular*}{1.0\textwidth}[t]{l@{\extracolsep{\fill}}r}
+%       \textbf{#1} & \textbf{\small #2} \\
+%       \textit{\small#3} & \textit{\small #4} \\
+%     \end{tabular*}\vspace{-7pt}
+% }
+
+% \newcommand{\resumeSubSubheading}[2]{
+%     \item
+%     \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+%       \textit{\small#1} & \textit{\small #2} \\
+%     \end{tabular*}\vspace{-7pt}
+% }
+
+% \newcommand{\resumeProjectHeading}[2]{
+%     \item
+%     \begin{tabular*}{1.001\textwidth}{l@{\extracolsep{\fill}}r}
+%       \small#1 & \textbf{\small #2}\\
+%     \end{tabular*}\vspace{-7pt}
+% }
+
+% \newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+% \renewcommand\labelitemi{$\vcenter{\hbox{\tiny$\bullet$}}$}
+% \renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+% \newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.0in, label={}]}
+% \newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+% \newcommand{\resumeItemListStart}{\begin{itemize}}
+% \newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+% %-------------------------------------------
+% %%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% \begin{document}
+
+% %----------HEADING----------
+% % \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
+% %   \textbf{\href{http://sourabhbajaj.com/}{\Large Sourabh Bajaj}} & Email : \href{mailto:sourabh@sourabhbajaj.com}{sourabh@sourabhbajaj.com}\\
+% %   \href{http://sourabhbajaj.com/}{http://www.sourabhbajaj.com} & Mobile : +1-123-456-7890 \\
+% % \end{tabular*}
+
+% \begin{center}
+%     {\Huge \scshape Ved Prakash} \\ \vspace{1pt}
+%     Lucknow, India \\ \vspace{1pt}
+%     \small \raisebox{-0.1\height}\faPhone\ +91-7752911254 ~ \href{mailto:hi@vedprakash.me}{\raisebox{-0.2\height}\faEnvelope\  \underline{hi@vedprakash.me}} ~ 
+%     \href{https://linkedin.com/in/vedprakashsigh/}{\raisebox{-0.2\height}\faLinkedin\ \underline{linkedin.com/in/vedprakashsigh}}  ~
+%     \href{https://github.com/vedprakashsigh/}{\raisebox{-0.2\height}\faGithub\ \underline{github.com/vedprakashsigh}}
+%     \vspace{-8pt}
+% \end{center}
+
+
+% %-----------EDUCATION-----------
+% \section{Education}
+%   \resumeSubHeadingListStart
+%     \resumeSubheading
+%       {Birla Institute of Technology}{December 2021 – August 2025}
+%       {Bachelor of Technology | Electrical and Electronics Engineering }{Ranchi, Jharkhand}
+%       \vspace{-8pt}
+%   \resumeSubHeadingListEnd
+%   \begin{itemize}[leftmargin=0.0in, label={}]
+%     \small{\item{
+%     \vspace{4pt}
+%      \text{CGPA}{: 8.82} \\
+%     }}
+%  \end{itemize}
+ 
+%  % \vspace{-13pt}
+ 
+%  %    \resumeSubHeadingListStart
+%  %        \resumeSubheading
+%  %          {Central Academy}{April 2019 – March 2020}
+%  %          {Senior School Certificate Examination }{Lucknow, Uttar Pradesh}
+%  %          \vspace{-8pt}
+%  %    \resumeSubHeadingListEnd
+%  %  \begin{itemize}[leftmargin=0.0in, label={}]
+%  %    \small{\item{
+%  %     \text{Grade}{: 92.6\%} \\
+%  %    }}
+%  % \end{itemize}
+ 
+%  % \vspace{-13pt}
+ 
+%  % \resumeSubHeadingListStart
+%  %    \resumeSubheading
+%  %      {Central Academy}{April 2017 – March 2018}
+%  %      {All India Secondary School Examination}{Lucknow, Uttar Pradesh}
+%  %      \vspace{-8pt}
+%  %  \resumeSubHeadingListEnd
+%  %  \begin{itemize}[leftmargin=0.0in, label={}]
+%  %    \small{\item{
+%  %     \text{Grade}{: 85.2\%} \\
+%  %    }}
+%  % \end{itemize}
+%  \vspace{-10pt}
+ 
+
+
+% %-----------Experience-----------
+% % \section{Experience}
+% %     \vspace{-5pt}
+% %     \resumeSubHeadingListStart
+% %         \resumeProjectHeading
+% %             {\textbf{Slash Mark} $|$ \emph{Python Intern} $|$ \emph{Virtual Internship in collaboration with AICTE}} {May 2024 – July 2024}
+% %             \resumeItemListStart
+% %                 \resumeItem{Completed \textbf{three Python projects} for the Internship Completion Certificate, showcasing proficiency in Python.}
+% %                 \resumeItem{Gained hands-on experience in \textbf{Python programming} and problem-solving skills.}
+% %             \resumeItemListEnd
+% %     \resumeSubHeadingListEnd
+% %     \vspace{-10pt}
+
+% \section{Experience}
+%     \vspace{-5pt}
+%     \resumeSubHeadingListStart
+%         \resumeProjectHeading
+%             {\textbf{SRDT} $|$ \emph{Intern – Software QA \& Full Stack Development}} {January 2025 – May 2025}
+%             \resumeItemListStart
+%                 \resumeItem{Performed \textbf{manual testing} (functional, regression, usability), created \textbf{test cases}, and documented \textbf{bugs/defects}.}
+%                 \resumeItem{Assisted in \textbf{frontend (React.js)} and \textbf{backend (Java Spring Boot)} tasks under developer guidance, including UI fixes, API integration, and database validation.}
+%                 \resumeItem{Collaborated in an \textbf{Agile environment}, supporting sprint planning, testing, and code reviews.}
+%             \resumeItemListEnd
+%     \resumeSubHeadingListEnd
+%     \vspace{-10pt}
+
+
+
+
+% %-----------PROJECTS-----------
+% \section{Projects} 
+%     \vspace{-5pt}
+%     \resumeSubHeadingListStart
+%         \resumeProjectHeading
+%     {\textbf{EEESoc Website} $|$ \emph{NextJS, GitHub OAuth, MongoDB }$|$ \href{https://eeesocbit.com/}{\raisebox{-0.2\height}\ \underline{Live Site}}}{December 2023}
+%     \resumeItemListStart [rightmargin=0.25in]
+%         \resumeItem{Collaborated with a team of \textbf{3 developers} to design and implement the EEESoc club website, using NextJS for the frontend and MongoDB for database management, serving \textbf{100+ active users}.}
+%         \resumeItem{Led the development and management of a \textbf{secure dashboard} for \textbf{admin}, enabling them to perform CRUD operations on critical site content, improving content management efficiency by \textbf{30\%}.}
+%         \resumeItem{Integrated GitHub OAuth for secure authentication, reducing unauthorized access attempts by \textbf{50\%}, and ensuring only verified users could manage the website.}
+%         \resumeItem{Contributed to a \textbf{20\% faster} deployment process through collaboration and continuous integration practices, resulting in timely updates to the club’s events and announcements.}
+%     \resumeItemListEnd
+%     \vspace{-16pt}
+
+%         \resumeProjectHeading
+%             {\textbf{UnityTalks} $|$ \emph{NextJS, Prisma, Supabase, TypeScript, Tailwind CSS} $|$ \href{https://unity-talks.vercel.app/}{\raisebox{-0.2\height}\ \underline{Demo Link}} $|$ \href{https://github.com/vedprakashsigh/UnityTalks}{\raisebox{-0.2\height}\ \underline{GitHub Repo}}}{May 2024}
+%             \resumeItemListStart [rightmargin=0.25in]
+%                 \resumeItem{Developed UnityTalks, a versatile communication platform enabling unified conversations and collaboration through voice/video chats and text channels for \textbf{10-15 users}.}
+%                 \resumeItem{Engineered features for seamless communication, including voice chats, video calls using Livekit, and text channels with a dynamic and intuitive user interface, accommodating up to \textbf{5 participants} per call.}
+%                 \resumeItem{Integrated Next.js with Clerk for authentication, Socket.IO for real-time communication, Prisma for database management, and Supabase for backend services, achieving a message delivery rate of \textbf{95\%}.}
+%                 \resumeItem{Received feedback from \textbf{7-8 users} praising the platform's ease of use and reliability.}
+%             \resumeItemListEnd 
+%             \vspace{-16pt}
+
+%         \resumeProjectHeading
+%             {\textbf{Issue Monitor} $|$ \emph{Flask, React, TypeScript, Chakra-UI, PostgresDB} $|$ \href{https://issue-monitor-frontend.vercel.app}{\raisebox{-0.2\height}\ \underline{Demo Link}} $|$ \href{https://github.com/vedprakashsigh/issue-monitor-frontend}{\raisebox{-0.2\height}\ \underline{GitHub Repo}}}{July 2024}
+%             \resumeItemListStart [rightmargin=0.25in]
+%                 \resumeItem{Developed an issue tracker web app with \textbf{5-10} users, where roles are automatically assigned based on email domain: Admin (\textbf{2-3 users}), Project Manager (\textbf{1-2 users}), and Member (\textbf{2-5 users}).}
+%                 \resumeItem{Implemented an \textbf{admin dashboard} allowing Admins to manage roles and restrict project addition to \textbf{2-3 Admins/Project Managers}.}
+%                 \resumeItem{Designed the app with \textbf{Dark/Light themes} using Chakra-UI, resulting in a \textbf{20\%} increase in user satisfaction across various environments.}
+%                 % \resumeItem{Utilized Flask and SQLAlchemy for backend development, integrating PostgresDB for data management and Flask-Migrate for \textbf{5} successful database migrations.}
+%                 \resumeItem{Features include automatic log generation, issue tracking with up to \textbf{20 comments} per issue, and project visibility restricted to assigned users only.}
+%             \resumeItemListEnd
+
+
+%     % \resumeSubHeadingListStart
+%     %   \resumeProjectHeading
+%     %       {\textbf{Portfolio Website} $|$ \emph{ReactJS, SCSS, Firebase} $|$ \href{https://vedprakash.me}{\raisebox{-0.2\height}\ \underline{Demo Link}} $|$ \href{https://github.com/vedprakashsigh/react-portfolio}{\raisebox{-0.2\height}\ \underline{GitHub Repo}} }{May 2023}
+%     %       \resumeItemListStart [rightmargin=0.25in]
+%     %         \resumeItem{Spearheaded the development of a professional portfolio website utilizing ReactJS, SCSS, and Firebase, showcasing skills and projects.}
+%     %         \resumeItem{Engineered features encompassing smooth navigation, responsive design, and real-time project updates through Firebase.}
+%     %             \resumeItemListEnd
+%     %       \vspace{-18pt}
+
+%     %   \resumeProjectHeading
+%     %       {\textbf{UnityTalks} $|$ \emph{NextJS, Prisma, Supabase, TypeScript, Tailwind CSS} $|$ \href{https://unity-talks.vercel.app/}{\raisebox{-0.2\height}\ \underline{Demo Link}} $|$ \href{https://github.com/vedprakashsigh/UnityTalks}{\raisebox{-0.2\height}\ \underline{GitHub Repo}}}{May 2024}
+%     %       \resumeItemListStart [rightmargin=0.25in]
+%     %         \resumeItem{Developed UnityTalks, a versatile communication platform enabling unified conversations and collaboration through voice/video chats and text channels.}
+%     %         \resumeItem{Engineered features for seamless communication, including voice chats, video calls, and text channels with a dynamic and intuitive user interface.}
+%     %         \resumeItem{Integrated Next.js with Clerk for authentication, Livekit for real-time communication, Prisma for database management, and Supabase for backend services.}
+            
+%     %         % \resumeItem{Developed UnityTalks, a versatile communication platform enabling unified conversations and collaboration through voice/video chats and text channels.}
+%     %         % \resumeItem{Engineered features for seamless communication, including voice chats, video calls, and text channels, with a dynamic and intuitive user interface. Integrated Next.js with Clerk for authentication, Livekit for real-time communication, Prisma for database management, and Supabase for backend services.}
+%     %         % % \resumeItem{Integrated Next.js with Clerk for authentication, Livekit for real-time communication, Prisma for database management, and Supabase for backend services.}
+%     %       \resumeItemListEnd 
+%     %       \vspace{-18pt}
+
+
+          
+%     %   \resumeProjectHeading
+%     %       {\textbf{Issue Monitor} $|$ \emph{Flask, React} $|$ \href{https://issue-monitor-frontend.vercel.app}{\raisebox{-0.2\height}\ \underline{Demo Link}} $|$ \href{https://github.com/vedprakashsigh/issue-monitor-frontend}{\raisebox{-0.2\height}\ \underline{GitHub Repo}}}{July 2024}
+%     %       \resumeItemListStart [rightmargin=0.25in]
+%     %         \resumeItem{Developed an issue tracker web app facilitating user registration, user login, and CRUD operations on projects and issues.}
+%     %         \resumeItem{Implemented a user-friendly interface with React for managing and tracking issues efficiently.}
+%     %         \resumeItem{Utilized Flask for the backend to handle authentication, authorization, and data management.}
+%     %         % \resumeItem{Deployed the application for real-time issue monitoring and collaboration among users.}
+%     %       \resumeItemListEnd 
+          
+%       % \resumeProjectHeading
+%       %     {\textbf{A* Path Finder Algorithm GUI} $|$ \emph{Python, PyGame} $|$ \href{https://github.com/vedprakashsigh/pathFindingAlgorithm}{\raisebox{-0.2\height}\ \underline{GitHub Repo}}}{July 2023}
+%       %     \resumeItemListStart [rightmargin=0.25in]
+%       %       \resumeItem{Conceptualized and crafted an interactive A* pathfinding algorithm visualizer using PyGame in Python.}
+%       %       \resumeItem{Illustrated the A* algorithm dynamically, maneuvering through mazes and identifying optimal paths.}
+%       %       \resumeItem{Designed an intuitive GUI with customizable grids and dynamic visualization for an immersive educational experience.}
+%       %     \resumeItemListEnd 
+%       %     \vspace{-6pt}
+%     \resumeSubHeadingListEnd
+% \vspace{-10pt}
+
+% %-----------SKILLS-----------
+% \section{Skills}
+%     \vspace{-5pt}
+%     \resumeSubHeadingListStart
+%       \resumeProjectHeading
+%           {\textbf{Technical Skills}} {}
+%  \resumeItemListStart[leftmargin=0.25in]
+%     \resumeItem {\textbf{Languages}{: Python, HTML, CSS, JavaScript, TypeScript}}
+%    \resumeItem {\textbf{Technologies/Frameworks}{: ReactJS, NextJS, Flask, Firebase, MongoDB, Postgres, MySQL, GIT/GitHub} }
+%      \resumeItem {\textbf{Computer Fundamentals}{: Object Oriented Programming, Database Management System, Data Structures and Algorithms} }
+%  \resumeItemListEnd    
+%           % \vspace{-16pt}
+    
+%  %      \resumeProjectHeading
+%  %          {\textbf{Soft Skills}} {}
+%  % \resumeItemListStart[leftmargin=0.25in]
+%  %    \resumeItem{Communication Skill, Team Management, Leadership, Responsible  } 
+    
+%  % \resumeItemListEnd 
+%     \resumeSubHeadingListEnd
+%    \vspace{-10pt}
+   
+ 
+% % %-----------PoR---------------
+% % \section{Position of Responsibility}
+% %     \resumeSubHeadingListStart
+% %     \vspace{-5pt}
+% %         \resumeProjectHeading
+% %         {\textbf{EEE Society} $|$ \emph{Deputy Web Dev Co-Ordinator} $|$ \emph{Birla Institute of Technology}}{August 2023 – July 2024}
+% %             \resumeItemListStart
+% %                 \resumeItem{Served as Deputy Web Developer at EEESoc, actively bolstering the society’s online presence and functionality, and collaborating with a team to develop a website using Next.js.}        
+% %             \resumeItemListEnd
+% %             \vspace{-18pt}
+            
+% %         \resumeProjectHeading
+% %        {\textbf{Departmental Placement Unit} $|$ \emph{Student Co-Ordinator} $|$ \emph{Birla Institute of Technology}} {January 2024 – Present}
+% %     \resumeItemListStart
+% %         \resumeItem{Orchestrated skill enhancement sessions and technical workshops to empower fellow batchmates in honing their software engineering skills and securing job opportunities.}               
+% %     \resumeItemListEnd
+
+% %     \resumeSubHeadingListEnd
+% %  \vspace{-16pt}
+ 
+
+% %-----------Certifications-----------
+% \section{Certifications}
+% \begin{itemize}
+%     \item {\href{https://www.udemy.com/certificate/UC-9451586f-a8cf-45f7-b818-efd1fce6cad6/}
+%     {\raisebox{-0.2\height}\ \underline{DSA: In-Depth using Python - Udemy}}}
+%       \hfill \textbf{December 2022}
+% \end{itemize}
+% \vspace{-10pt}
+
+% %-----------Achievements-----------
+% % \section{Achievements}
+% % \begin{itemize}
+% %     \item Hatch from Scratch, IET, BIT Mesra: Secured 1st Position (Pantheon-22 - Tech Fest of BIT Mesra)
+% % \end{itemize}
+% %  \vspace{-10pt}
+
+% %-----------Volunteering Activities---------------
+% \section{Volunteering Activities}
+%     \resumeSubHeadingListStart
+%         \resumeSubheading{National Service Scheme}{December 2021 – May 2023}{Volunteer}{Birla Institute of Technology}
+%             \resumeItemListStart
+%                 \resumeItem{Collaborated with a diverse team of volunteers to strategize and execute community outreach initiatives, including health camps, awareness drives, and cleanliness campaigns.}
+%             \resumeItemListEnd
+        
+%     \resumeSubHeadingListEnd
+
+
+% \end{document}
+
