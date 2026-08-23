@@ -356,29 +356,33 @@ export default function AdminPanel({ user }: AdminProps) {
                   {/* Cover Image Upload */}
                   <div className="space-y-2">
                     <Label>Cover Image</Label>
-                    <div className="flex gap-2 items-center">
+                    <div className="flex gap-2 items-center flex-wrap">
                       <Input
                         value={item.cover_image}
                         onChange={e => onChange({ ...item, cover_image: e.target.value })}
                         placeholder="https://..."
-                        className="flex-1"
+                        className="flex-1 min-w-[200px]"
                       />
-                      <Input
-                        type="file"
-                        accept="image/*"
-                        className="max-w-[140px]"
-                        onChange={async (e) => {
-                          const file = e.target.files?.[0]
-                          if (file) {
-                            setBlogImageUploading(true)
-                            const url = await uploadBlogImage(file)
-                            if (url) {
-                              onChange({ ...item, cover_image: url })
+                      <label className="btn-outline cursor-pointer flex items-center gap-2 px-4 py-2 text-sm whitespace-nowrap">
+                        <Upload size={14} />
+                        <span>Choose File</span>
+                        <Input
+                          type="file"
+                          accept="image/*"
+                          className="sr-only"
+                          onChange={async (e) => {
+                            const file = e.target.files?.[0]
+                            if (file) {
+                              setBlogImageUploading(true)
+                              const url = await uploadBlogImage(file)
+                              if (url) {
+                                onChange({ ...item, cover_image: url })
+                              }
+                              setBlogImageUploading(false)
                             }
-                            setBlogImageUploading(false)
-                          }
-                        }}
-                      />
+                          }}
+                        />
+                      </label>
                       {blogImageUploading && (
                         <div className="flex items-center gap-2 text-sm text-muted-foreground">
                           <div className="w-4 h-4 border-2 border-primary/30 border-t-primary rounded-full animate-spin" />
