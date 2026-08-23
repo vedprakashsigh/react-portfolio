@@ -26,7 +26,7 @@ export default function Contact() {
     if (!formRef.current) return
     setSending(true)
     emailjs
-      .sendForm('service_phbyyuk', 'template_qrvz1rc', formRef.current, 'CWBuRASwCa6QJFzY1')
+      .sendForm('service_phbyyuk', 'template_qrvz1rc', formRef.current, import.meta.env.VITE_EMAILJS_PUBLIC_KEY)
       .then(() => {
         setSent(true)
         setSending(false)
