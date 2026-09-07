@@ -1,0 +1,53 @@
+{
+  "description": "Cloudflare Redirect Rules for www → non-www and trailing slash enforcement. Apply these via Cloudflare Dashboard → Rules → Redirect Rules or via API.",
+  "rules": [
+    {
+      "description": "Redirect www to non-www (preserve path and query)",
+      "expression": "(http.host eq \"www.vedprakash.me\")",
+      "action": "redirect",
+      "action_parameters": {
+        "from_value": {
+          "target_url": {
+            "value": "https://vedprakash.me",
+            "expression": "concat(\"https://vedprakash.me\", http.request.uri.path, http.request.uri.query)"
+          },
+          "status_code": 301,
+          "preserve_query_string": true
+        }
+      },
+      "enabled": true
+    },
+    {
+      "description": "Redirect non-trailing-slash routes to trailing slash (for content pages)",
+      "expression": "(http.host eq \"vedprakash.me\" and http.request.uri.path in {\"/about\" \"/projects\" \"/blog\" \"/resume\" \"/contact\"})",
+      "action": "redirect",
+      "action_parameters": {
+        "from_value": {
+          "target_url": {
+            "value": "https://vedprakash.me",
+            "expression": "concat(\"https://vedprakash.me\", http.request.uri.path, \"/\", http.request.uri.query)"
+          },
+          "status_code": 301,
+          "preserve_query_string": true
+        }
+      },
+      "enabled": true
+    },
+    {
+      "description": "Redirect index.html to root",
+      "expression": "(http.host eq \"vedprakash.me\" and http.request.uri.path eq \"/index.html\")",
+      "action": "redirect",
+      "action_parameters": {
+        "from_value": {
+          "target_url": {
+            "value": "https://vedprakash.me/",
+            "expression": ""
+          },
+          "status_code": 301,
+          "preserve_query_string": false
+        }
+      },
+      "enabled": true
+    }
+  ]
+}

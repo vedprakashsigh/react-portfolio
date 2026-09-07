@@ -1,0 +1,14 @@
+{
+  "name": "react-portfolio-q2r",
+  "compatibility_date": "2026-09-07",
+  "pages_build_output_dir": "./dist",
+  "send_metrics": true,
+  "rules": [
+    {
+      "type": "redirect",
+      "source": "www.vedprakash.me/*",
+      "destination": "https://vedprakash.me/*",
+      "status_code": 301
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "description": "DNS records for vedprakash.me on Cloudflare. Based on your current DNS settings.",
+  "records": [
+    {
+      "type": "CNAME",
+      "name": "@",
+      "target": "react-portfolio-q2r.pages.dev",
+      "proxy": true,
+      "ttl": "Auto",
+      "comment": "✅ ALREADY CORRECT: Root domain points to Cloudflare Pages"
+    },
+    {
+      "type": "CNAME",
+      "name": "www",
+      "target": "react-portfolio-q2r.pages.dev",
+      "proxy": true,
+      "ttl": "Auto",
+      "comment": "❌ NEEDS UPDATE: Currently points to parkingpage.namecheap.com - should point to Cloudflare Pages"
+    }
+  ],
+  "notes": [
+    "The @ record is already correctly configured!",
+    "Update the www record to point to react-portfolio-q2r.pages.dev (with proxy enabled)",
+    "Both records MUST be proxied (orange cloud) for redirects and security headers to work",
+    "After updating the www record, wait for DNS propagation (usually < 5 minutes on Cloudflare)",
+    "Then enable Redirect Rules from cloudflare-redirect-rules.json"
+  ],
+  "current_dns_status": {
+    "vedprakash.me": {
+      "type": "CNAME",
+      "target": "react-portfolio-q2r.pages.dev",
+      "proxy": true,
+      "status": "✅ CORRECT"
+    },
+    "www.vedprakash.me": {
+      "type": "CNAME",
+      "target": "parkingpage.namecheap.com",
+      "proxy": true,
+      "status": "❌ NEEDS UPDATE - should be: react-portfolio-q2r.pages.dev"
+    }
+  },
+  "verification_commands": [
+    "dig vedprakash.me CNAME",
+    "dig www.vedprakash.me CNAME",
+    "curl -I https://vedprakash.me/",
+    "curl -I https://www.vedprakash.me/"
+  ]
+}
