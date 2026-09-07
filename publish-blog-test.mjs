@@ -1,4 +1,11 @@
-import { saveBlog } from './src/lib/supabase.ts';
+// Simple test script to publish blog without relying on import.meta.env
+import { createClient } from '@supabase/supabase-js';
+
+// Set environment variables directly
+const supabaseUrl = 'https://liysyufshixdxwmdulgb.supabase.co';
+const supabaseKey = 'sb_publishable_q6Q8F0hcojceAxywE5Q45w_lkmXWkAK';
+
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 // Blog post data for the second blog: Implementing Row Level Security (RLS) for Supabase Storage in React Applications
 const blogData = {
@@ -488,15 +495,25 @@ The source code for this implementation is available in:
 
 async function publishBlog() {
   try {
-    const success = await saveBlog(blogData);
-    if (success) {
-      console.log('Blog post published successfully!');
-    } else {
-      console.log('Failed to publish blog post');
+    const { error } = await supabase
+      .from('blogs')
+      .upsert(blogData);
+
+    if (error) {
+      console.error('Error saving blog:', error);
+      return false;
     }
+
+    console.log('Blog post published successfully!');
+    return true;
   } catch (error) {
     console.error('Error publishing blog:', error);
+    return false;
   }
 }
 
-publishBlog();
+publishBlog().then(success => {
+  if (!success) {
+    process.exit(1);
+  }
+});

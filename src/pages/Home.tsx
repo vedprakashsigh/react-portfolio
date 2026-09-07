@@ -7,6 +7,7 @@ import { Separator } from '@/components/ui/separator'
 import AnimatedLetters from '@/components/AnimatedLetters'
 import ParticleCanvas from '@/components/ParticleCanvas'
 import AgentFlowDiagram from '@/components/AgentFlowDiagram'
+import SEO from '@/components/SEO'
 
 const highlights = [
   { icon: Bot, label: 'Agentic AI' },
@@ -50,8 +51,12 @@ const publication = {
 export default function Home() {
   return (
     <>
+      <SEO
+        title="Ved Prakash | Agentic AI Engineer"
+        description="Building scalable AI systems with LangGraph, RAG & multi-agent architectures. Specialist Programmer at Infosys."
+      />
       <ParticleCanvas />
-      
+
       {/* ─── Hero Section ─── */}
       <section className="relative z-10 min-h-screen flex items-center" id="hero-section">
         <div className="container mx-auto px-6 lg:px-16">
@@ -116,13 +121,13 @@ export default function Home() {
 
             <div className="flex gap-4 animate-[fadeIn_1s_2.3s_backwards]">
               <Button asChild size="lg" className="btn-shimmer font-semibold group" id="cta-contact">
-                <Link to="/contact">
+                <Link to="/contact/">
                   Let's Talk
                   <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>
               <Button asChild variant="outline" size="lg" id="cta-projects">
-                <Link to="/projects">View Projects</Link>
+                <Link to="/projects/">View Projects</Link>
               </Button>
             </div>
           </div>

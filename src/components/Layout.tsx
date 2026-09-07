@@ -11,11 +11,11 @@ import { Separator } from '@/components/ui/separator'
 
 const navItems = [
   { to: '/', icon: Home, label: 'Home', end: true },
-  { to: '/about', icon: User, label: 'About' },
-  { to: '/projects', icon: FolderKanban, label: 'Projects' },
-  { to: '/blog', icon: BookOpen, label: 'Blog' },
-  { to: '/resume', icon: FileText, label: 'Resume' },
-  { to: '/contact', icon: Mail, label: 'Contact' },
+  { to: '/about/', icon: User, label: 'About' },
+  { to: '/projects/', icon: FolderKanban, label: 'Projects' },
+  { to: '/blog/', icon: BookOpen, label: 'Blog' },
+  { to: '/resume/', icon: FileText, label: 'Resume' },
+  { to: '/contact/', icon: Mail, label: 'Contact' },
 ]
 
 const socialLinks = [

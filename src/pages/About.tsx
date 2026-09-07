@@ -6,6 +6,7 @@ import { Separator } from '@/components/ui/separator'
 import AnimatedLetters from '@/components/AnimatedLetters'
 import LeetCodeStats from '@/components/LeetCodeStats'
 import { getSkills, getExperience, type Skill, type Experience } from '@/lib/supabase'
+import SEO from '@/components/SEO'
 
 // Fallback data in case Supabase isn't configured yet
 const fallbackSkills: Skill[] = [
@@ -84,8 +85,13 @@ export default function About() {
   }, [])
 
   return (
-    <div className="min-h-screen py-12 lg:py-20 px-6 lg:px-16 page-enter" id="about-page">
-      <div className="container mx-auto max-w-6xl">
+    <>
+      <SEO
+        title="About Ved Prakash | Agentic AI Engineer"
+        description="Learn about Ved Prakash's background, experience, and expertise in agentic AI systems, LangChain, LangGraph, and RAG architectures."
+      />
+      <div className="min-h-screen py-12 lg:py-20 px-6 lg:px-16 page-enter" id="about-page">
+        <div className="container mx-auto max-w-6xl">
         {/* Header */}
         <h1 className="text-4xl lg:text-5xl font-bold text-gradient mb-4">
           <AnimatedLetters strArray={['A', 'b', 'o', 'u', 't', ' ', 'M', 'e']} idx={1} />
@@ -258,5 +264,6 @@ export default function About() {
         </div>
       </div>
     </div>
+  </>
   )
 }

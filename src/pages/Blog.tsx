@@ -7,6 +7,7 @@ import { Separator } from '@/components/ui/separator'
 import AnimatedLetters from '@/components/AnimatedLetters'
 import ParticleCanvas from '@/components/ParticleCanvas'
 import { getBlogs, type Blog } from '@/lib/supabase'
+import SEO from '@/components/SEO'
 
 export default function Blog() {
   const [blogs, setBlogs] = useState<Blog[]>([])
@@ -29,6 +30,10 @@ export default function Blog() {
 
   return (
     <>
+      <SEO
+        title="Blog | Ved Prakash | Agentic AI Engineer"
+        description="Read Ved Prakash's latest articles on agentic AI, LangChain, LangGraph, and multi-agent systems."
+      />
       <ParticleCanvas />
 
       <div className="relative z-10 min-h-screen py-12 lg:py-20 px-6 lg:px-16 page-enter" id="blog-page">
@@ -89,7 +94,7 @@ export default function Blog() {
                     </div>
 
                     <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors">
-                      <Link to={`/blog/${blog.slug}`}>
+                      <Link to={`/blog/${blog.slug}/`}>
                         {blog.title}
                       </Link>
                     </h2>
@@ -99,7 +104,7 @@ export default function Blog() {
                     </p>
 
                     <Link
-                      to={`/blog/${blog.slug}`}
+                      to={`/blog/${blog.slug}/`}
                       className="inline-flex items-center gap-2 text-sm text-primary hover:text-cyan-300 transition-colors"
                     >
                       Read more

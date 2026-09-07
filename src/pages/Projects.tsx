@@ -7,6 +7,7 @@ import { Separator } from '@/components/ui/separator'
 import AnimatedLetters from '@/components/AnimatedLetters'
 import AgentFlowDiagram from '@/components/AgentFlowDiagram'
 import { getProjects, type Project } from '@/lib/supabase'
+import SEO from '@/components/SEO'
 
 const fallbackProjects: Project[] = [
   {
@@ -123,8 +124,13 @@ export default function Projects() {
   const secondary = projects.filter(p => !p.is_featured)
 
   return (
-    <div className="min-h-screen py-12 lg:py-20 px-6 lg:px-16 page-enter" id="projects-page">
-      <div className="container mx-auto max-w-6xl">
+    <>
+      <SEO
+        title="Projects | Ved Prakash | Agentic AI Engineer"
+        description="Explore Ved Prakash's AI engineering projects including agentic systems, LangChain applications, and multi-agent architectures."
+      />
+      <div className="min-h-screen py-12 lg:py-20 px-6 lg:px-16 page-enter" id="projects-page">
+        <div className="container mx-auto max-w-6xl">
         <h1 className="text-4xl lg:text-5xl font-bold text-gradient mb-4">
           <AnimatedLetters strArray={['P', 'r', 'o', 'j', 'e', 'c', 't', 's']} idx={1} />
         </h1>
@@ -307,5 +313,6 @@ export default function Projects() {
         )}
       </div>
     </div>
+  </>
   )
 }

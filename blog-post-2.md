@@ -1,12 +1,17 @@
-import { saveBlog } from './src/lib/supabase.ts';
+---
+id: 2a1b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d
+title: Implementing Row Level Security (RLS) for Supabase Storage in React Applications
+slug: implementing-rls-supabase-storage-react
+excerpt: Learn how to secure your Supabase storage buckets with Row Level Security policies to protect user uploads while maintaining a seamless experience in your React applications.
+cover_image: https://images.unsplash.com/photo-1551288049-bebda4e38f71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyNzQ2NzN8MHwxfHNlYXJjaHwxfHxTdG9yYWdlJTIwU2VjdXJpdHl8ZW58MHx8fHwxNjYyNjY4NjQw&ixlib=rb-1.2.1&q=80&w=1080
+author: Ved Prakash
+published_at: 2026-08-24T10:00:00.000Z
+created_at: 2026-08-24T10:00:00.000Z
+is_published: true
+read_time_minutes: 10
+---
 
-// Blog post data for the second blog: Implementing Row Level Security (RLS) for Supabase Storage in React Applications
-const blogData = {
-  id: "2a1b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d",
-  title: "Implementing Row Level Security (RLS) for Supabase Storage in React Applications",
-  slug: "implementing-rls-supabase-storage-react",
-  excerpt: "Learn how to secure your Supabase storage buckets with Row Level Security policies to protect user uploads while maintaining a seamless experience in your React applications.",
-  content: `# 🔐 Implementing Row Level Security (RLS) for Supabase Storage in React Applications
+# 🔐 Implementing Row Level Security (RLS) for Supabase Storage in React Applications
 
 > **"Security isn't just about keeping bad things out—it's about letting the right things in, at the right time, for the right people."**
 
@@ -26,7 +31,7 @@ In my recent work on the React portfolio (commit [3550a24](https://github.com/ve
 
 First, create a storage bucket for user uploads:
 
-\`\`\`sql
+```sql
 -- Insert into storage.buckets
 insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
 values (
@@ -36,13 +41,13 @@ values (
   52428800, -- 50MB limit
   ARRAY['image/png', 'image/jpeg', 'image/gif', 'application/pdf', 'text/plain']
 );
-\`\`\`
+```
 
 ### 2. Implementing RLS Policies
 
 The key to secure storage is implementing proper RLS policies. Here's what I implemented for the uploads bucket:
 
-\`\`\`sql
+```sql
 -- Enable RLS on the storage.objects table
 alter table storage.objects enable row level security;
 
@@ -85,13 +90,13 @@ using (
   bucket_id = 'uploads' and
   (storage.foldername(name))[1] = auth.uid()::text
 );
-\`\`\`
+```
 
 ### 3. Understanding the Storage Folder Structure
 
 The policies above assume a specific folder structure where each user gets their own top-level folder:
 
-\`\`\`
+```
 uploads/
 ├── user-uuid-1/
 │   ├── profile.jpg
@@ -101,9 +106,9 @@ uploads/
 │   ├── avatar.png
 │   └── document.docx
 └── shared/ (optional, for publicly accessible files)
-\`\`\`
+```
 
-The \`storage.foldername(name)\` function extracts the first folder segment from the file path, which we use to identify the user's UUID.
+The `storage.foldername(name)` function extracts the first folder segment from the file path, which we use to identify the user's UUID.
 
 ## ⚙️ React Implementation: Secure File Uploads
 
@@ -111,7 +116,7 @@ The \`storage.foldername(name)\` function extracts the first folder segment from
 
 First, ensure your Supabase client is properly configured with authentication:
 
-\`\`\`typescript
+```typescript
 // src/lib/supabase.ts
 import { createClient } from '@supabase/supabase-js'
 
@@ -119,13 +124,13 @@ const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey)
-\`\`\`
+```
 
 ### 2. Secure File Upload Component
 
 Here's a React component that implements secure file uploads with RLS:
 
-\`\`\`typescript
+```typescript
 import { useState } from 'react'
 import { supabase } from '@/lib/supabase'
 
@@ -163,8 +168,8 @@ export const SecureFileUpload = () => {
 
       // Create a unique file path within the user's folder
       const fileExt = file.name.split('.').pop()
-      const fileName = \`\${crypto.randomUUID()}.{\$fileExt}\`
-      const filePath = \`\${user.id}/\${fileName}\`
+      const fileName = `${crypto.randomUUID()}.${fileExt}`
+      const filePath = `${user.id}/${fileName}`
 
       // Upload the file
       const { data, error: uploadError } = await supabase.storage
@@ -181,7 +186,7 @@ export const SecureFileUpload = () => {
         data: { publicUrl },
       } = supabase.storage.from('uploads').getPublicUrl(filePath)
 
-      setSuccess(\`File uploaded successfully! URL: \${publicUrl}\`)
+      setSuccess(`File uploaded successfully! URL: ${publicUrl}`)
     } catch (err: any) {
       setError(err.message || 'An error occurred during upload')
     } finally {
@@ -199,26 +204,26 @@ export const SecureFileUpload = () => {
         className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100"
         disabled={loading}
       />
-
+      
       {loading && (
         <div className="flex items-center gap-2 text-sm text-gray-500">
           Uploading...
           <div className="h-4 w-4 border-2 border-gray-500 border-t-gray-200 rounded-full animate-spin" />
         </div>
       )}
-
+      
       {error && <p className="text-sm text-red-500">{error}</p>}
       {success && <p className="text-sm text-green-500">{success}</p>}
     </div>
   )
 }
-\`\`\`
+```
 
 ### 3. Secure File Download/Access
 
 When serving files to users, ensure they can only access files they're permitted to see:
 
-\`\`\`typescript
+```typescript
 export const getSecureFileUrl = async (filePath: string): Promise<string | null> => {
   try {
     // Verify the user has access to this file
@@ -246,7 +251,7 @@ export const getSecureFileUrl = async (filePath: string): Promise<string | null>
     return null
   }
 }
-\`\`\`
+```
 
 ## 🛡️ Advanced RLS Policies for Complex Scenarios
 
@@ -254,7 +259,7 @@ export const getSecureFileUrl = async (filePath: string): Promise<string | null>
 
 For scenarios where files need to be shared between users (like project collaborations), you can implement more complex policies:
 
-\`\`\`sql
+```sql
 -- Create a shared_files access control table
 create table shared_files (
   id uuid primary key default gen_random_uuid(),
@@ -279,13 +284,13 @@ using (
       and permission_level = 'read'
   )
 );
-\`\`\`
+```
 
 ### Public Files with Moderation
 
 For cases where you want to allow certain files to be publicly accessible (like profile pictures or portfolio items):
 
-\`\`\`sql
+```sql
 -- Policy: Public read access for approved files
 create policy "Public can read approved files"
 on storage.objects for select
@@ -295,7 +300,7 @@ using (
   (storage.foldername(name))[1] = 'public' and
   (select is_approved from public_files where file_path = storage.objects.name)
 );
-\`\`\`
+```
 
 ## 🧪 Testing Your RLS Implementation
 
@@ -303,7 +308,7 @@ using (
 
 Test your policies directly in the SQL editor:
 
-\`\`\`sql
+```sql
 -- Test as a specific user
 set request.jwt.claims ->> 'sub' to '00000000-0000-0000-0000-000000000000';
 
@@ -314,24 +319,24 @@ values ('uploads', 'wrong-user/test.txt', '{}');
 -- Try to insert a file in the correct user's folder (should succeed)
 insert into storage.objects (bucket_id, name, metadata)
 values ('uploads', '00000000-0000-0000-0000-000000000000/test.txt', '{}');
-\`\`\`
+```
 
 ### 2. Testing with React Query or SWR
 
 In your React application, test different scenarios:
 
-\`\`\`typescript
+```typescript
 // Test upload as authenticated user
 const uploadFile = async (file: File) => {
   const { data, error } = await supabase.storage
     .from('uploads')
-    .upload(\`user-id/\${file.name}\`, file)
-
+    .upload(`user-id/${file.name}`, file)
+  
   if (error) {
     console.error('Upload failed (expected if not authorized):', error)
     return null
   }
-
+  
   return data
 }
 
@@ -340,15 +345,15 @@ const accessFile = async (filePath: string) => {
   const { data, error } = await supabase.storage
     .from('uploads')
     .download(filePath)
-
+  
   if (error) {
     console.log('Access denied (expected):', error.message)
     return null
   }
-
+  
   return data
 }
-\`\`\`
+```
 
 ## 📊 Performance Considerations
 
@@ -374,7 +379,7 @@ While RLS adds a layer of security, it doesn't significantly impact performance 
 
 Combine RLS with rate limiting to prevent abuse:
 
-\`\`\`typescript
+```typescript
 // In your upload handler, add rate limiting
 const lastUploadTime = localStorage.getItem('lastUploadTime')
 const now = Date.now()
@@ -384,7 +389,7 @@ if (lastUploadTime && (now - parseInt(lastUploadTime)) < 5000) { // 5 seconds
 }
 
 localStorage.setItem('lastUploadTime', String(now))
-\`\`\`
+```
 
 ## 🎯 Best Practices for Secure Storage
 
@@ -410,7 +415,7 @@ Never rely solely on client-side validation:
 
 Set up monitoring to detect suspicious activity:
 
-\`\`\`sql
+```sql
 -- Create an audit log table for storage operations
 create table storage_audit_log (
   id uuid primary key default gen_random_uuid(),
@@ -430,20 +435,20 @@ create or replace function log_storage_operation()
 returns trigger as $$
 begin
   insert into storage_audit_log (
-    bucket_id, operation, user_id, file_path,
+    bucket_id, operation, user_id, file_path, 
     ip_address, user_agent, success, error_message
   ) values (
     new.bucket_id,
     tg_op,
-    case when current_setting('request.jwt.claims', true) is null
-         then null
+    case when current_setting('request.jwt.claims', true) is null 
+         then null 
          else (current_setting('request.jwt.claims', true) ->> 'sub')::uuid
     end,
     new.name,
     inet_client_addr(),
     current_setting('request.user_agent', true),
     tg_op in ('INSERT', 'UPDATE', 'DELETE'),
-    case when tg_op = 'DELETE' then null
+    case when tg_op = 'DELETE' then null 
          else pg_last_sql_error()
     end
   );
@@ -455,7 +460,7 @@ $$ language plpgsql security definer;
 create trigger storage_audit_trigger
 after insert or update or delete on storage.objects
 for each row execute function log_storage_operation();
-\`\`\`
+```
 
 ## 🏁 Conclusion & Live Implementation
 
@@ -476,27 +481,4 @@ The source code for this implementation is available in:
 
 > **🔒 Security Challenge**: Try implementing RLS for your own Supabase storage buckets. Start with the basic user-isolation approach shown above, then gradually add more complex scenarios like shared folders or public file access as your application requirements evolve. Remember to test thoroughly using both the Supabase SQL editor and your React application!
 
-**What security measures have you implemented for file uploads in your applications?** Share your experiences in the comments below—I'd love to learn from your approaches as well.
-  `,
-  cover_image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyNzQ2NzN8MHwxfHNlYXJjaHwxfHxTdG9yYWdlJTIwU2VjdXJpdHl8ZW58MHx8fHwxNjYyNjY4NjQw&ixlib=rb-1.2.1&q=80&w=1080",
-  author: "Ved Prakash",
-  published_at: new Date().toISOString(),
-  created_at: new Date().toISOString(),
-  is_published: true,
-  read_time_minutes: 10
-};
-
-async function publishBlog() {
-  try {
-    const success = await saveBlog(blogData);
-    if (success) {
-      console.log('Blog post published successfully!');
-    } else {
-      console.log('Failed to publish blog post');
-    }
-  } catch (error) {
-    console.error('Error publishing blog:', error);
-  }
-}
-
-publishBlog();
+**What security measures have you implemented for file uploads in your applications?** Share your experiences in the comments below—I'd love to learn from your approaches as well!

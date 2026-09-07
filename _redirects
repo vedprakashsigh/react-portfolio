@@ -1,0 +1,15 @@
+# Redirect www to non-www (preferred domain)
+https://www.vedprakash.me/*   https://vedprakash.me/:splat   301
+
+# Redirect index.html to root (remove unnecessary redirect)
+/index.html   /   301
+
+# Add trailing slashes for consistency (preferred for content/blog)
+/about   /about/   301
+/projects   /projects/   301
+/blog   /blog/   301
+/resume   /resume/   301
+/contact   /contact/   301
+
+# Blog post trailslash handling (if needed)
+/blog/*   /blog/:splat/   301

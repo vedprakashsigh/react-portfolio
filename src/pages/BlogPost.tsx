@@ -10,6 +10,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { Separator } from '@/components/ui/separator'
 import ParticleCanvas from '@/components/ParticleCanvas'
 import { getBlogBySlug, getBlogLikes, hasUserLiked, toggleLike, getBlogComments, addBlogComment, type Blog, type BlogComment } from '@/lib/supabase'
+import SEO from '@/components/SEO'
 
 // Custom markdown components for enhanced rendering
 const markdownComponents = {
@@ -215,7 +216,7 @@ export default function BlogPost() {
           <Card className="glass">
             <CardContent className="p-8 text-center">
               <h2 className="text-2xl font-bold text-foreground mb-4">Post not found</h2>
-              <Link to="/blog" className="text-primary hover:text-cyan-300">
+              <Link to="/blog/" className="text-primary hover:text-cyan-300">
                 ← Back to blog
               </Link>
             </CardContent>
@@ -227,13 +228,19 @@ export default function BlogPost() {
 
   return (
     <>
+      {blog && (
+        <SEO
+          title={`${blog.title} | Ved Prakash | Agentic AI Engineer`}
+          description={blog.excerpt.substring(0, 160) + '...'}
+        />
+      )}
       <ParticleCanvas />
 
       <div className="relative z-10 min-h-screen py-12 lg:py-20 px-6 lg:px-16 page-enter">
         <div className="container mx-auto max-w-3xl">
           {/* Back link */}
           <Link
-            to="/blog"
+            to="/blog/"
             className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-8"
           >
             <ArrowLeft size={16} />
