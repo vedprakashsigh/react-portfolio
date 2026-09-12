@@ -1,18 +1,20 @@
 import { useState } from 'react'
 import { NavLink, Link, Outlet } from 'react-router-dom'
 import {
-  Home, User, FolderKanban, FileText, Mail,
+  Home, User, FolderKanban, FileText, Mail, BriefcaseBusiness,
   Linkedin, Github, ExternalLink, Menu, X, Download,
   BookOpen
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
+import { hiringLinks } from '@/lib/freelance'
 
 const navItems = [
   { to: '/', icon: Home, label: 'Home', end: true },
   { to: '/about/', icon: User, label: 'About' },
   { to: '/projects/', icon: FolderKanban, label: 'Projects' },
+  { to: '/services/', icon: BriefcaseBusiness, label: 'Services' },
   { to: '/blog/', icon: BookOpen, label: 'Blog' },
   { to: '/resume/', icon: FileText, label: 'Resume' },
   { to: '/contact/', icon: Mail, label: 'Contact' },
@@ -82,6 +84,9 @@ function Sidebar() {
               <Icon size={16} />
             </a>
           ))}
+          {hiringLinks.map(({ href, label }) => (
+            <a key={label} href={href} target="_blank" rel="noreferrer" className="text-[10px] font-mono text-muted-foreground hover:text-primary" aria-label={label}>{label}</a>
+          ))}
         </div>
       </aside>
 
@@ -143,6 +148,7 @@ function Sidebar() {
               </a>
             ))}
           </div>
+          {hiringLinks.length > 0 && <div className="flex gap-4 px-4 mt-4">{hiringLinks.map(({ href, label }) => <a key={label} href={href} target="_blank" rel="noreferrer" className="text-sm text-muted-foreground hover:text-primary">{label}</a>)}</div>}
         </div>
       )}
     </>

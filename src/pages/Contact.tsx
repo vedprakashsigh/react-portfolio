@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react'
-import { Send, Linkedin, Github, Mail, MapPin } from 'lucide-react'
+import { Send, Linkedin, Github, Mail, MapPin, CalendarDays } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
@@ -9,6 +9,7 @@ import { Separator } from '@/components/ui/separator'
 import AnimatedLetters from '@/components/AnimatedLetters'
 import emailjs from '@emailjs/browser'
 import SEO from '@/components/SEO'
+import { freelanceConfig, hiringLinks } from '@/lib/freelance'
 
 const contactInfo = [
   { icon: Mail, label: 'hi@vedprakash.me', href: 'mailto:hi@vedprakash.me' },
@@ -27,8 +28,16 @@ export default function Contact() {
     if (!formRef.current) return
     setSending(true)
     emailjs
-      .sendForm('service_phbyyuk', 'template_qrvz1rc', formRef.current, import.meta.env.VITE_EMAILJS_PUBLIC_KEY)
+      .sendForm(freelanceConfig.emailJsServiceId, freelanceConfig.emailJsTemplateId, formRef.current, freelanceConfig.emailJsPublicKey)
       .then(() => {
+        if (freelanceConfig.emailJsAutoReplyTemplateId && formRef.current) {
+          emailjs.sendForm(
+            freelanceConfig.emailJsServiceId,
+            freelanceConfig.emailJsAutoReplyTemplateId,
+            formRef.current,
+            freelanceConfig.emailJsPublicKey,
+          ).catch(() => console.warn('Auto-reply failed to send.'))
+        }
         setSent(true)
         setSending(false)
         formRef.current?.reset()
@@ -43,13 +52,13 @@ export default function Contact() {
   return (
     <>
       <SEO
-        title="Contact | Ved Prakash | Agentic AI Engineer"
-        description="Get in touch with Ved Prakash for collaborations, speaking engagements, or inquiries about agentic AI systems."
+        title="Start an AI Workflow Audit"
+        description="Tell me about your document-heavy workflow, internal knowledge problem, or support process. Part-time remote AI automation engagements."
       />
       <div className="min-h-screen py-12 lg:py-20 px-6 lg:px-16 page-enter" id="contact-page">
         <div className="container mx-auto max-w-4xl">
           <h1 className="text-4xl lg:text-5xl font-bold text-gradient mb-4">
-            <AnimatedLetters strArray={['C', 'o', 'n', 't', 'a', 'c', 't', ' ', 'M', 'e']} idx={1} />
+            <AnimatedLetters strArray={['T', 'e', 'l', 'l', ' ', 'm', 'e', ' ', 'a', 'b', 'o', 'u', 't', ' ', 'y', 'o', 'u', 'r', ' ', 'w', 'o', 'r', 'k', 'f', 'l', 'o', 'w']} idx={1} />
           </h1>
           <Separator className="mb-10 max-w-xs" />
 
@@ -58,7 +67,7 @@ export default function Contact() {
             <Card className="glass glow-border">
               <CardContent className="p-6 sm:p-8">
                 <p className="text-muted-foreground mb-6 leading-relaxed">
-                  Have a project in mind or want to discuss AI solutions? Drop me a message and I'll get back to you as soon as possible.
+                  Share the repetitive process you want to improve. A useful first note includes the current workflow, the tools or data involved, and what a better outcome would look like. I work part-time, remotely, and reply within two business days.
                 </p>
 
                 {sent && (
@@ -68,6 +77,7 @@ export default function Contact() {
                 )}
 
                 <form ref={formRef} onSubmit={handleSubmit} className="space-y-4" id="contact-form">
+                  <input type="hidden" name="subject" value="New AI Workflow Inquiry" />
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="name">Name</Label>
@@ -79,13 +89,18 @@ export default function Contact() {
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="subject">Subject</Label>
-                    <Input id="subject" name="subject" placeholder="What's this about?" required />
+                    <Label htmlFor="project_type">What do you need help with?</Label>
+                    <Input id="project_type" name="project_type" placeholder="e.g. document workflow, internal knowledge, support" required />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="message">Message</Label>
-                    <Textarea id="message" name="message" placeholder="Your message..." className="min-h-[150px]" required />
+                    <Label htmlFor="current_workflow">Current workflow</Label>
+                    <Textarea id="current_workflow" name="current_workflow" placeholder="What happens today, who does it, and where does it become slow or error-prone?" className="min-h-[110px]" required />
                   </div>
+                  <div className="space-y-2"><Label htmlFor="systems_data">Tools, systems, or data involved</Label><Input id="systems_data" name="systems_data" placeholder="e.g. PDFs, CRM, knowledge base, spreadsheets" required /></div>
+                  <div className="space-y-2"><Label htmlFor="goal">Desired outcome</Label><Input id="goal" name="goal" placeholder="What should be faster, safer, or easier?" required /></div>
+                  <div className="grid sm:grid-cols-2 gap-4"><div className="space-y-2"><Label htmlFor="timeline">Expected timeline</Label><Input id="timeline" name="timeline" placeholder="e.g. this month, exploring" required /></div><div className="space-y-2"><Label htmlFor="budget_range">Budget range</Label><Input id="budget_range" name="budget_range" placeholder="e.g. under $1k, $1k–$3k, unsure" required /></div></div>
+                  <div className="space-y-2"><Label htmlFor="preferred_contact">Preferred contact method</Label><Input id="preferred_contact" name="preferred_contact" placeholder="Email, LinkedIn, WhatsApp, or a call" required /></div>
+                  <div className="space-y-2"><Label htmlFor="message">Anything else?</Label><Textarea id="message" name="message" placeholder="Optional context, constraints, or questions" className="min-h-[100px]" /></div>
                   <Button
                     type="submit"
                     size="lg"
@@ -112,6 +127,7 @@ export default function Contact() {
             {/* Contact Info */}
             <div className="space-y-4">
               <h2 className="text-lg font-semibold text-foreground mb-4">Get in Touch</h2>
+              {freelanceConfig.bookingUrl && <Button asChild className="w-full mb-4"><a href={freelanceConfig.bookingUrl} target="_blank" rel="noreferrer"><CalendarDays size={16} className="mr-2" />Book a discovery call</a></Button>}
               {contactInfo.map(({ icon: Icon, label, href }) => (
                 <div key={label} className="flex items-center gap-3 group">
                   <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors shrink-0">
@@ -132,14 +148,13 @@ export default function Contact() {
                 </div>
               ))}
 
+              {hiringLinks.length > 0 && <><Separator className="my-6" /><div><p className="text-xs font-mono uppercase tracking-wider text-primary mb-3">Hire through a platform</p><div className="flex gap-3">{hiringLinks.map(({ href, label }) => <Button key={label} asChild variant="outline" size="sm"><a href={href} target="_blank" rel="noreferrer">{label}</a></Button>)}</div></div></>}
+
               <Separator className="my-6" />
 
               <Card className="glass glow-border p-5">
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  I'm always interested in hearing about new opportunities in
-                  <span className="text-primary"> Agentic AI</span>,
-                  <span className="text-primary"> LLM applications</span>, and
-                  <span className="text-primary"> intelligent automation</span>.
+                  Best fit: a real operational workflow with clear owners and a willingness to keep humans in the loop for decisions that need judgment.
                 </p>
               </Card>
             </div>

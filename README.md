@@ -54,7 +54,12 @@ Create a `.env` file at the root of the project with your Supabase credentials:
 ```bash
 VITE_SUPABASE_URL=your-supabase-url
 VITE_SUPABASE_PUBLISHABLE_KEY=your-supabase-anon-key
+VITE_EMAILJS_PUBLIC_KEY=your-emailjs-public-key
+VITE_EMAILJS_SERVICE_ID=your-emailjs-service-id
+VITE_EMAILJS_TEMPLATE_ID=your-emailjs-template-id
 ```
+
+Copy `.env.example` to `.env` for the full set of optional hiring-channel settings. `VITE_BOOKING_URL`, `VITE_UPWORK_URL`, and `VITE_FIVERR_URL` are intentionally optional: the matching buttons and links remain hidden until valid profile links are configured. Configure the EmailJS templates using [the exact variables and bodies in `docs/emailjs-template.md`](docs/emailjs-template.md), including the optional auto-reply template ID.
 
 ### Database Initialization
 Execute the included SQL scripts on your Supabase SQL Editor:

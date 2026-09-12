@@ -87,8 +87,8 @@ export default function About() {
   return (
     <>
       <SEO
-        title="About Ved Prakash | Agentic AI Engineer"
-        description="Learn about Ved Prakash's background, experience, and expertise in agentic AI systems, LangChain, LangGraph, and RAG architectures."
+        title="About | AI Automation Engineer"
+        description="Background and engineering approach behind part-time AI workflow audits, RAG systems, and human-aware automation builds."
       />
       <div className="min-h-screen py-12 lg:py-20 px-6 lg:px-16 page-enter" id="about-page">
         <div className="container mx-auto max-w-6xl">

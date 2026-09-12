@@ -51,7 +51,7 @@ describe('App Routing', () => {
     expect(document.getElementById('main-content')).toBeInTheDocument();
     
     // Check for Home page specific elements
-    expect(screen.getByText('Agentic AI Engineer')).toBeInTheDocument();
+    expect(screen.getByText('Turn manual workflows into reliable AI-assisted systems.')).toBeInTheDocument();
     expect(screen.getByTestId('mock-particle-canvas')).toBeInTheDocument();
   });
 
@@ -63,5 +63,28 @@ describe('App Routing', () => {
     );
 
     expect(await screen.findByText('What I Do')).toBeInTheDocument();
+  });
+
+  it('renders the Services page with the audit offer', () => {
+    render(
+      <MemoryRouter initialEntries={['/services/']}>
+        <App />
+      </MemoryRouter>
+    );
+
+    expect(screen.getByText('AI Workflow Audit')).toBeInTheDocument();
+    expect(screen.getByText('A clear, low-risk process')).toBeInTheDocument();
+  });
+
+  it('renders a qualified inquiry form on the Contact page', () => {
+    render(
+      <MemoryRouter initialEntries={['/contact/']}>
+        <App />
+      </MemoryRouter>
+    );
+
+    expect(screen.getByLabelText('Current workflow')).toBeRequired();
+    expect(screen.getByLabelText('Desired outcome')).toBeRequired();
+    expect(screen.getByLabelText('Budget range')).toBeRequired();
   });
 });

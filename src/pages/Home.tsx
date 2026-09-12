@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight, Sparkles, Bot, Brain, Workflow, Lightbulb, Zap, FileText } from 'lucide-react'
+import { ArrowRight, Sparkles, Bot, Brain, Workflow, Lightbulb, Zap, FileText, CalendarDays, BadgeCheck } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -8,6 +8,7 @@ import AnimatedLetters from '@/components/AnimatedLetters'
 import ParticleCanvas from '@/components/ParticleCanvas'
 import AgentFlowDiagram from '@/components/AgentFlowDiagram'
 import SEO from '@/components/SEO'
+import { freelanceConfig } from '@/lib/freelance'
 
 const highlights = [
   { icon: Bot, label: 'Agentic AI' },
@@ -52,43 +53,36 @@ export default function Home() {
   return (
     <>
       <SEO
-        title="Ved Prakash | Agentic AI Engineer"
-        description="Building scalable AI systems with LangGraph, RAG & multi-agent architectures. Specialist Programmer at Infosys."
+        title="AI Automation for Operational Workflows"
+        description="Part-time AI workflow audits and reliable automations for document-heavy operations, support, and internal knowledge teams."
       />
       <ParticleCanvas />
 
       {/* ─── Hero Section ─── */}
-      <section className="relative z-10 min-h-screen flex items-center" id="hero-section">
+      <section className="relative z-10 min-h-screen flex items-start pt-16 lg:pt-24" id="hero-section">
         <div className="container mx-auto px-6 lg:px-16">
           <div className="max-w-3xl page-enter">
             {/* Greeting */}
             <div className="flex items-center gap-2 mb-6">
               <div className="h-px w-8 bg-gradient-to-r from-primary to-transparent" />
               <span className="text-primary font-mono text-sm tracking-wider uppercase">
-                Hello, I'm
+                AI automation, built responsibly
               </span>
             </div>
 
             {/* Name */}
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-foreground mb-4 leading-[1.1]">
-              <AnimatedLetters
-                strArray={['V', 'e', 'd', ' ', 'P', 'r', 'a', 'k', 'a', 's', 'h']}
-                idx={1}
-              />
+              Turn manual workflows into reliable AI-assisted systems.
             </h1>
 
             {/* Title */}
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold mb-6">
-              <span className="text-gradient">Agentic AI Engineer</span>
+              <span className="text-gradient">Workflow audits → scoped AI automation builds</span>
             </h2>
 
             {/* Subtitle — concrete, memorable hook */}
             <p className="text-muted-foreground text-base sm:text-lg max-w-xl mb-8 leading-relaxed animate-[fadeIn_1s_1.5s_backwards]">
-              Building scalable AI systems that{' '}
-              <span className="text-foreground font-medium">audit invoices</span>,{' '}
-              <span className="text-foreground font-medium">orchestrate incident response</span>, and{' '}
-              <span className="text-foreground font-medium">reason autonomously</span> — using
-              LangGraph, RAG & multi-agent architectures.
+              I help teams identify safe AI opportunities in document-heavy operations, support, and internal knowledge—and turn the right ones into practical, human-aware systems.
             </p>
 
             {/* Highlight pills */}
@@ -119,15 +113,10 @@ export default function Home() {
               </a>
             </div>
 
-            <div className="flex gap-4 animate-[fadeIn_1s_2.3s_backwards]">
-              <Button asChild size="lg" className="btn-shimmer font-semibold group" id="cta-contact">
-                <Link to="/contact/">
-                  Let's Talk
-                  <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </Button>
+            <div className="flex gap-4 mb-12 lg:mb-16 animate-[fadeIn_1s_2.3s_backwards]">
+              {freelanceConfig.bookingUrl ? <Button asChild size="lg" className="btn-shimmer font-semibold group" id="cta-book-call"><a href={freelanceConfig.bookingUrl} target="_blank" rel="noreferrer">Book a discovery call <CalendarDays size={18} className="ml-2" /></a></Button> : <Button asChild size="lg" className="btn-shimmer font-semibold group" id="cta-contact"><Link to="/contact/">Discuss your workflow <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform" /></Link></Button>}
               <Button asChild variant="outline" size="lg" id="cta-projects">
-                <Link to="/projects/">View Projects</Link>
+                <Link to="/projects/">View Case Studies</Link>
               </Button>
             </div>
           </div>
@@ -146,14 +135,21 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="relative z-10 px-6 lg:px-16 pb-20" id="trust-signals">
+        <div className="container mx-auto glass glow-border rounded-2xl p-6 sm:p-8 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+          <div><div className="flex items-center gap-2 text-primary mb-2"><BadgeCheck size={18} /><p className="text-xs font-mono uppercase tracking-wider">Evidence, not hype</p></div><p className="text-sm text-muted-foreground max-w-2xl">Explore public technical writing, a published research paper, and anonymized case studies. No client logos or unverifiable claims.</p></div>
+          <div className="flex flex-wrap gap-3"><Button asChild variant="outline" size="sm"><Link to="/blog/">Technical writing</Link></Button><Button asChild variant="outline" size="sm"><Link to="/about/">Background & research</Link></Button><Button asChild variant="outline" size="sm"><a href="https://github.com/vedprakashsigh" target="_blank" rel="noreferrer">GitHub</a></Button></div>
+        </div>
+      </section>
+
       {/* ─── AI Systems I've Built ─── */}
-      <section className="relative z-10 pb-20 px-6 lg:px-16" id="featured-ai-systems">
-        <div className="container mx-auto max-w-6xl">
+      <section className="relative z-10 pb-20" id="featured-ai-systems">
+        <div className="container mx-auto px-6 lg:px-16">
           <div className="flex items-center gap-3 mb-10">
             <div className="w-10 h-10 rounded-xl bg-primary/15 flex items-center justify-center">
               <Zap size={20} className="text-primary" />
             </div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-foreground">AI Systems I've Built</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-foreground">Relevant case studies</h2>
           </div>
 
           <div className="space-y-6">
@@ -216,6 +212,7 @@ export default function Home() {
               </Card>
             ))}
           </div>
+          <p className="text-xs text-muted-foreground mt-5">Examples are anonymized technical case studies; public work is linked on the full case-studies page.</p>
 
           {/* See all projects CTA */}
           <div className="mt-8 text-center">

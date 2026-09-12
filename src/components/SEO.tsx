@@ -5,9 +5,10 @@ interface SEOProps {
   title: string
   description?: string
   pathname?: string // Optional override for canonical URL
+  structuredData?: Record<string, unknown>
 }
 
-const SEO = ({ title, description, pathname }: SEOProps) => {
+const SEO = ({ title, description, pathname, structuredData }: SEOProps) => {
   const location = useLocation()
   const currentPath = pathname ?? location.pathname
 
@@ -16,7 +17,7 @@ const SEO = ({ title, description, pathname }: SEOProps) => {
 
   useEffect(() => {
     // Update document title
-    document.title = `${title} | Ved Prakash | Agentic AI Engineer`
+    document.title = `${title} | Ved Prakash`
 
     // Create or update meta description
     let metaDescription = document.querySelector('meta[name="description"]')
@@ -97,9 +98,22 @@ const SEO = ({ title, description, pathname }: SEOProps) => {
       document.head.appendChild(twitterDescription)
     }
     if (description) {
-      twitterDescription.setAttribute('content', description)
+    twitterDescription.setAttribute('content', description)
     }
-  }, [title, description, currentPath])
+
+    let schema = document.querySelector('script[data-seo-schema="person"]') as HTMLScriptElement | null
+    if (!schema) {
+      schema = document.createElement('script')
+      schema.type = 'application/ld+json'
+      schema.dataset.seoSchema = 'person'
+      document.head.appendChild(schema)
+    }
+    schema.text = JSON.stringify(structuredData ?? {
+      '@context': 'https://schema.org', '@type': 'Person', name: 'Ved Prakash', url: BASE_URL,
+      jobTitle: 'AI Automation Engineer', sameAs: ['https://www.linkedin.com/in/vedprakashsigh', 'https://github.com/vedprakashsigh'],
+      knowsAbout: ['AI automation', 'RAG systems', 'document processing', 'LangGraph'],
+    })
+  }, [title, description, currentPath, structuredData])
 
   return null
 }

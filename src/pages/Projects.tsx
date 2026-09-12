@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import { ExternalLink, Lightbulb, AlertTriangle, Wrench } from 'lucide-react'
+import { ExternalLink, Lightbulb, AlertTriangle, Wrench, ShieldCheck, ArrowRight } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -35,6 +36,10 @@ const fallbackProjects: Project[] = [
       'MCP Server exposes the entire pipeline as an executable tool for broader ecosystem integration.',
     ],
     architecture_diagram_type: 'invoice_system,invoice_graph',
+    confidentiality_label: 'Anonymized enterprise workflow',
+    proof_type: 'Case study based on non-confidential engineering work',
+    outcome: 'Designed to reduce a multi-hour manual review workflow to a reviewed, AI-assisted process.',
+    cta: 'Discuss a comparable document workflow',
   },
   {
     id: '2',
@@ -60,6 +65,10 @@ const fallbackProjects: Project[] = [
       'Used Docker Compose for reproducible deployments — the entire stack (agents + vector store + observability) spins up with a single command.',
     ],
     architecture_diagram_type: 'multi_agent',
+    confidentiality_label: 'Prototype / anonymized systems case study',
+    proof_type: 'Technical architecture demonstration',
+    outcome: 'Demonstrates a guardrailed approach to alert triage, investigation, and handover.',
+    cta: 'Discuss an operations workflow',
   },
   {
     id: '3',
@@ -75,6 +84,7 @@ const fallbackProjects: Project[] = [
     key_challenges: [],
     architecture_decisions: [],
     architecture_diagram_type: '',
+    confidentiality_label: 'Public project', proof_type: 'Live public project', outcome: 'Collaborative website for a student community.', cta: 'Discuss a similar portal or workflow',
   },
   {
     id: '4',
@@ -90,6 +100,7 @@ const fallbackProjects: Project[] = [
     key_challenges: [],
     architecture_decisions: [],
     architecture_diagram_type: '',
+    confidentiality_label: 'Public project', proof_type: 'Live public project', outcome: 'Role-aware issue tracking and operational visibility.', cta: 'Discuss a similar workflow',
   },
 ]
 
@@ -101,19 +112,25 @@ export default function Projects() {
       if (data.length > 0) {
         // Merge remote data with fallback enrichments when remote lacks new columns
         const merged = data.map(remoteProject => {
+          const fallback = fallbackProjects.find(fp => fp.title === remoteProject.title)
+          const caseStudyMeta = fallback ? {
+            confidentiality_label: fallback.confidentiality_label,
+            proof_type: fallback.proof_type,
+            outcome: fallback.outcome,
+            cta: fallback.cta,
+          } : { confidentiality_label: 'Project', proof_type: 'Project evidence', outcome: '', cta: 'Discuss a similar workflow' }
           if (remoteProject.is_featured !== undefined && remoteProject.is_featured !== null) {
             let diagramType = remoteProject.architecture_diagram_type
             if (diagramType === 'agent_pipeline') {
               diagramType = 'invoice_system,invoice_graph'
             }
-            return { ...remoteProject, architecture_diagram_type: diagramType }
+            return { ...remoteProject, architecture_diagram_type: diagramType, ...caseStudyMeta }
           }
           // Find matching fallback by title to get enriched fields
-          const fallback = fallbackProjects.find(fp => fp.title === remoteProject.title)
           if (fallback) {
             return { ...remoteProject, ...fallback, id: remoteProject.id }
           }
-          return { ...remoteProject, is_featured: false, why_i_built: '', key_challenges: [], architecture_decisions: [], architecture_diagram_type: '' }
+          return { ...remoteProject, is_featured: false, why_i_built: '', key_challenges: [], architecture_decisions: [], architecture_diagram_type: '', ...caseStudyMeta }
         })
         setProjects(merged)
       }
@@ -126,8 +143,8 @@ export default function Projects() {
   return (
     <>
       <SEO
-        title="Projects | Ved Prakash | Agentic AI Engineer"
-        description="Explore Ved Prakash's AI engineering projects including agentic systems, LangChain applications, and multi-agent architectures."
+        title="AI Automation Case Studies"
+        description="Anonymized and public case studies covering AI workflow automation, document processing, RAG systems, and operational tooling."
       />
       <div className="min-h-screen py-12 lg:py-20 px-6 lg:px-16 page-enter" id="projects-page">
         <div className="container mx-auto max-w-6xl">
@@ -135,7 +152,7 @@ export default function Projects() {
           <AnimatedLetters strArray={['P', 'r', 'o', 'j', 'e', 'c', 't', 's']} idx={1} />
         </h1>
         <p className="text-muted-foreground mb-2 max-w-2xl">
-          AI systems I've designed and built — with architecture decisions, key challenges, and engineering context.
+          Selected case studies showing how I approach reliable AI-assisted workflows. Employer-related examples are anonymized; public projects are linked where available.
         </p>
         <Separator className="mb-10 max-w-xs" />
 
@@ -177,6 +194,8 @@ export default function Projects() {
                         </Button>
                       )}
                     </div>
+                    <div className="flex flex-wrap gap-2 mb-5"><Badge variant="outline" className="text-xs"><ShieldCheck size={12} className="mr-1" />{project.confidentiality_label || 'Project'}</Badge><Badge variant="outline" className="text-xs">{project.proof_type || 'Project evidence'}</Badge></div>
+                    {project.outcome && <div className="mb-6 p-3 rounded-lg bg-primary/5 border border-primary/10"><p className="text-xs font-mono text-primary uppercase tracking-wider mb-1">Outcome</p><p className="text-sm text-foreground/90">{project.outcome}</p></div>}
 
                     {/* Tech stack */}
                     <div className="flex flex-wrap gap-1.5 mb-8">
@@ -184,6 +203,7 @@ export default function Projects() {
                         <Badge key={tech.trim()} variant="glow" className="text-xs">{tech.trim()}</Badge>
                       ))}
                     </div>
+                    <Button asChild variant="ghost" size="sm" className="mt-7 px-0 text-primary hover:text-primary"><Link to="/contact/">{project.cta || 'Discuss a similar workflow'} <ArrowRight size={14} className="ml-2" /></Link></Button>
 
                     {/* Architecture Diagram */}
                     {project.architecture_diagram_type && (
@@ -292,6 +312,8 @@ export default function Projects() {
                       {project.description}
                     </p>
 
+                    {project.outcome && <p className="text-sm text-foreground/85 mb-5"><span className="text-primary font-medium">Outcome: </span>{project.outcome}</p>}
+
                     {/* CTA */}
                     {project.project_url && (
                       <Button
@@ -305,6 +327,7 @@ export default function Projects() {
                         <ExternalLink size={14} className="ml-2 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
                       </Button>
                     )}
+                    <Button asChild variant="ghost" size="sm" className="ml-2 text-primary"><Link to="/contact/">{project.cta || 'Discuss a similar workflow'}</Link></Button>
                   </div>
                 </Card>
               ))}

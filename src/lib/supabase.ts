@@ -21,6 +21,10 @@ export interface Project {
   key_challenges: string[]
   architecture_decisions: string[]
   architecture_diagram_type: string
+  confidentiality_label?: string
+  proof_type?: string
+  outcome?: string
+  cta?: string
 }
 
 export interface Experience {
